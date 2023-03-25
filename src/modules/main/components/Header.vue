@@ -1,0 +1,35 @@
+<template>
+    <div class="header__grid">
+        <div class="header__text">
+            <h1 class="header__heading">Hire. The world's best talent</h1>
+            <h3>Take the friction out of hiring and choose from the world's best software engineers. Rigorous technical and
+                behavioral vetting ensures only the top talent is presented to you.</h3>
+            <div class="header__button">
+                <v-btn block rounded="xl" size="x-large" class="button" color="deep-purple">Find Talent</v-btn>
+                <v-btn block rounded="xl" size="x-large" class="button right-button">Play Video</v-btn>
+            </div>
+
+
+            <div class="mt-4">
+                <ul class="d-flex flex-row gap-1">
+                    <li><a href="#">Global talent</a></li>
+                    <li><a href="#">Qualified engineers</a></li>
+                    <li><a href="#">Projects</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="header__grafico">
+            <img class="header__imagen" src="@/assets/header-user.png" alt="imagen nucleus app ">
+        </div>
+    </div>
+</template>
+
+<script setup>
+
+</script>
+
+<style scoped src="../styles/styles.main.css"></style>
+
+
