@@ -1,6 +1,11 @@
 <template>
     <div class="header__grid">
         <div class="header__text">
+            <div class="ad-container">
+                <p><span class="new-text text-green-accent-3">New</span> Get access to Top Pre-vetted Software
+                    Engineers.</p>
+            </div>
+
             <h1 class="header__heading">Hire. The world's best talent</h1>
             <h3>Take the friction out of hiring and choose from the world's best software engineers. Rigorous technical and
                 behavioral vetting ensures only the top talent is presented to you.</h3>
@@ -10,7 +15,7 @@
             </div>
 
 
-            <div class="mt-4">
+            <div class="mt-7">
                 <ul class="d-flex flex-row gap-1">
                     <li><a href="#">Global talent</a></li>
                     <li><a href="#">Qualified engineers</a></li>
@@ -20,7 +25,7 @@
 
         </div>
 
-        <div class="header__grafico">
+        <div class="header__grafico d-flex justify-space-around">
             <img class="header__imagen" src="@/assets/header-user.png" alt="imagen nucleus app ">
         </div>
     </div>

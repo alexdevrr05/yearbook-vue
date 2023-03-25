@@ -2,7 +2,7 @@
   <div id="navbar">
     <div class="navbar-container d-flex w-100 align-center">
       <div class="navbar-logo flex-1">
-        <h3>design.</h3>
+        <h3>alex<span style="color: #FA983F;">.</span></h3>
       </div>
 
       <!-- logo and routes -->
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       links: [
-        // { to: 'home', name: 'Home' },
+        { to: 'home', name: 'Home' },
         { to: 'login', name: 'Login' },
         // { to: 'pokemon-id', name: 'By id', id: 151 },
         // { to: 'https://google.com', name: 'Google' },
@@ -66,7 +66,7 @@ export default {
   border-radius: 30px;
   border: 1px solid white;
   padding: 2px 1rem;
-  color: white;
+  color: gray;
 }
 
 .search::placeholder {

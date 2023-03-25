@@ -36,7 +36,7 @@ export default {
 }
 
 .is-active {
-  border-bottom: 2px solid #42b983;
+  border-bottom: 2px solid #FA983F;
 }
 
 .normal-link {

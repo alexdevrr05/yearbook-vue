@@ -6,6 +6,9 @@ a {
     /* font-weight: bold; */
 }
 
+/* orange */
+/* #FA983F */
+
 .header__grid {
     background-color: #232935;
     color: white;
@@ -41,8 +44,9 @@ a {
     .header__grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 4rem;
+        gap: 3rem;
         align-items: center;
+        padding-top: 2rem;
     }
 }
 
@@ -62,3 +66,16 @@ a {
     color: white;
     font-size: 16px;
 }
+
+
+.ad-container {
+    padding: 0.5rem 1rem;
+    background-color: #1d222b;
+    margin-bottom: 1rem;
+    width: 80%;
+}
+
+.new-text {
+ font-weight: bold;   
+}
+

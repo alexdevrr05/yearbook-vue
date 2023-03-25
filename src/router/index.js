@@ -13,17 +13,16 @@ const routes = [
         /* webpackChunkName: "HomeLayout" */
         '@/modules/main/layouts/HomeLayout'
       ),
-    children: [
-      {
-        path: '/login',
-        name: 'login',
-        component: () =>
-          import(
-            /* webpackChunkName: "LoginPage" */
-            '@/modules/shared/pages/LoginPage'
-          ),
-      },
-    ],
+    children: [],
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () =>
+      import(
+        /* webpackChunkName: "LoginPage" */
+        '@/modules/shared/pages/LoginPage'
+      ),
   },
 ];
 
