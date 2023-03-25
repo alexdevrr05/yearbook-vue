@@ -22,7 +22,7 @@ export default {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #232935;
+  background-color: #1d222b;
   ;
 }
 </style>

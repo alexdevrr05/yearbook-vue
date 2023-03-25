@@ -7,7 +7,8 @@
             </div>
 
             <h1 class="header__heading">Hire. The world's best talent</h1>
-            <h3>Take the friction out of hiring and choose from the world's best software engineers. Rigorous technical and
+            <h3 class="header__description">Take the friction out of hiring and choose from the world's best software
+                engineers. Rigorous technical and
                 behavioral vetting ensures only the top talent is presented to you.</h3>
             <div class="header__button">
                 <v-btn block rounded="xl" size="x-large" class="button" color="deep-purple">Find Talent</v-btn>
@@ -15,7 +16,7 @@
             </div>
 
 
-            <div class="mt-7">
+            <div class="mt-7 container-ul">
                 <ul class="d-flex flex-row gap-1">
                     <li><a href="#">Global talent</a></li>
                     <li><a href="#">Qualified engineers</a></li>
@@ -35,6 +36,6 @@
 
 </script>
 
-<style scoped src="../styles/styles.main.css"></style>
+<style src="../styles/styles.main.css"></style>
 
 

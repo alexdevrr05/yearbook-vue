@@ -1,23 +1,56 @@
+:root {
+    --primary-color: #1d222b;
+    --secundary-color: #12151b;
+    --blanco: #FFF;
+    --negro: #000000;
+    --fuentePrincipal: 'Poppins', sans-serif;
+}
 
 a {
     text-decoration: none;
     color: white;
-    opacity: .7;
-    /* font-weight: bold; */
 }
 
 /* orange */
 /* #FA983F */
 
 .header__grid {
-    background-color: #232935;
     color: white;
+    padding: 0 1rem;
+    display: grid;
 }
 
 .header__text h3 {
     font-weight: 100;
     opacity: 0.7;
     padding-bottom: 1.5rem;
+}
+
+.header__text {
+    text-align: center;
+    order: 3;
+}
+
+@media (min-width: 768px) {
+    .header__grid {
+        background-color: var(--primary-color);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        align-items: center;
+        padding-top: 2rem;
+    }
+
+    .header__text {
+        text-align: left;
+        order: unset;
+    }   
+}
+
+@media (min-width: 1280px) { 
+    .header__grid {
+        padding: unset;
+    }
 }
 
 .gap-1 {
@@ -30,36 +63,69 @@ a {
 }
 
 .header__button {
-    width: 65%;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     align-items: center;
 }
 
+
+.container-ul {
+    display: flex;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .container-ul {
+        justify-content: left;
+    }
+}
+
+.ad-container {
+    padding: 0.5rem 1rem;
+    background-color: var(--secundary-color);
+    margin-bottom: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+
 @media (min-width: 768px) { 
-    /* .header__logo {
-        margin: 0;
-    } */
-    .header__grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 3rem;
-        align-items: center;
-        padding-top: 2rem;
+    .header__button {
+        width: 65%;
+    }
+
+    .ad-container {
+        width: 80%;    
+        margin-top: unset;
     }
 }
 
 .header__heading {
-    font-size: 3rem;
+    font-size: 1.5rem;
 }
+
+.header__description {
+    font-size: 1em;
+}
+
 @media (min-width: 768px) { 
     .header__heading {
-        text-align: left;
-        font-size: 4rem;
+        font-size: 3rem;
         line-height: 1.2;
         margin-bottom: 1rem;
     }
+
+    .header__description {
+        font-size: 1.17em;
+    }
+}
+
+@media (min-width: 1280px) {
+    .header__heading {
+        font-size: 4rem;
+    } 
 }
 
 .button {
@@ -68,14 +134,31 @@ a {
 }
 
 
-.ad-container {
-    padding: 0.5rem 1rem;
-    background-color: #1d222b;
-    margin-bottom: 1rem;
-    width: 80%;
-}
-
 .new-text {
  font-weight: bold;   
 }
 
+.button {
+    font-size: 12px;
+}
+
+@media (max-width: 968px) {
+    .button {
+        height: 2rem !important;
+    }
+}
+
+
+.header__grafico {
+    order: 1;
+}
+
+.header__grafico img {
+    width: 70%;
+}
+
+@media (min-width: 768px) {
+    .header__grafico img {
+        width: unset;
+    }   
+}

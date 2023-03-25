@@ -41,57 +41,62 @@ export default {
 };
 </script>
 
-<style>
-.gap-1 {
-  gap: .5rem;
-}
+<style scoped> .gap-1 {
+   gap: .5rem;
+ }
 
-.p-1 {
-  padding: 1rem;
-}
+ .p-1 {
+   padding: 1rem;
+ }
 
-.flex-1 {
-  flex: 1;
-}
+ .flex-1 {
+   flex: 1;
+ }
 
-.flex-3 {
-  flex: 3;
-}
+ .flex-3 {
+   flex: 3;
+ }
 
-.min-w-u {
-  min-width: unset !important;
-}
+ .min-w-u {
+   min-width: unset !important;
+ }
 
-.search {
-  border-radius: 30px;
-  border: 1px solid white;
-  padding: 2px 1rem;
-  color: gray;
-}
+ .search {
+   border-radius: 30px;
+   border: 1px solid white;
+   padding: 2px 1rem;
+   color: gray;
+ }
 
-.search::placeholder {
-  color: white;
-}
+ .search::placeholder {
+   color: white;
+ }
 
-.example {
-  width: .5px;
-  height: 10px;
-  background-color: white;
-  opacity: .5;
-}
+ .example {
+   width: .5px;
+   height: 10px;
+   background-color: white;
+   opacity: .5;
+ }
 
-#navbar {
-  position: fixed;
-  width: 1200px;
-  top: 0;
-  z-index: 1;
-}
+ #navbar {
+   position: fixed;
+   width: 1200px;
+   top: 0;
+   z-index: 1;
+ }
 
-.navbar-container {
-  padding: .5rem 0;
-}
+ .navbar-container {
+   padding: .5rem 1rem;
+ }
 
-.navbar-logo {
-  color: white;
-}
+ @media (min-width: 1280px) {
+   .navbar-container {
+     padding: .5rem 0;
+   }
+ }
+
+ .navbar-logo {
+   color: white;
+ }
 </style>
