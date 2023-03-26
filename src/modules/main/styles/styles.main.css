@@ -3,6 +3,7 @@
     --secundary-color: #12151b;
     --blanco: #FFF;
     --negro: #000000;
+    --verde: #00E676;
     --fuentePrincipal: 'Poppins', sans-serif;
 }
 
@@ -50,6 +51,7 @@ a {
 @media (min-width: 1280px) { 
     .header__grid {
         padding: unset;
+        margin-top: 3rem;
     }
 }
 

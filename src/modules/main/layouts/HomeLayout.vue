@@ -1,7 +1,8 @@
 <template>
     <div class="container">
-        <header-component />
         <router-view />
+        <header-component />
+        <content-cards />
     </div>
 </template>
   
@@ -11,7 +12,8 @@ import { defineAsyncComponent } from 'vue';
 
 export default {
     components: {
-        HeaderComponent: defineAsyncComponent(() => import(/* webpackChunkName: "Header" */ '@/modules/main/components/Header'))
+        HeaderComponent: defineAsyncComponent(() => import(/* webpackChunkName: "Header" */ '@/modules/main/components/Header')),
+        ContentCards: defineAsyncComponent(() => import(/* webpackChunkName: "ContentCardsLayout" */ './ContentCardsLayout'))
     }
 }
 
