@@ -1,6 +1,6 @@
 <template>
     <section class="section">
-        <div class="container">
+        <div class="container" v-motion :initial="{ opacity: 0, y: 300 }" :visibleOnce="{ opacity: 1, y: 0 }">
             <h1 class="title-cards-section">Nuestros agradecimientos</h1>
             <p class="">Este semestre quiero dar gracias a...</p>
             <div class="container-cards">
