@@ -2,7 +2,7 @@
 <template>
     <div class="card" :style="{ backgroundColor: cardColor }">
         <div class="card-content">
-            <h1>Card</h1>
+            <h1>{{ username }}</h1>
         </div>
     </div>
 </template>
@@ -16,6 +16,10 @@ export default {
             String,
             default: '#6834a6',
         },
+        username: {
+            String,
+            default: 'Pepe',
+        }
     },
 
     setup() {

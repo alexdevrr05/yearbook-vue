@@ -5,22 +5,22 @@
             <p class="">Este semestre quiero dar gracias a...</p>
             <div class="container-cards">
                 <!-- color crema -->
-                <customized-card cardColor="#E4CDC5" />
+                <customized-card username="Alex" cardColor="#E4CDC5" />
 
                 <!-- color verde -->
-                <customized-card cardColor="#4CAF50" />
+                <customized-card username="Libni" cardColor="#4CAF50" />
 
                 <!-- color rojo -->
-                <customized-card cardColor="#C22F3B" />
+                <customized-card username="Ramón" cardColor="#C22F3B" />
 
                 <!-- color amarillo -->
-                <customized-card cardColor="#FA983F" />
+                <customized-card username="Cristian" cardColor="#FA983F" />
 
                 <!-- color deep gray -->
-                <customized-card cardColor="#12151b" />
+                <customized-card username="Juan" cardColor="#12151b" />
 
                 <!-- color morado -->
-                <customized-card cardColor="#673AB7" />
+                <customized-card username="Daniela" cardColor="#673AB7" />
             </div>
         </div>
     </section>
