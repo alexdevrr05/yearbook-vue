@@ -20,8 +20,6 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
   background-color: #1d222b;
   ;
 }

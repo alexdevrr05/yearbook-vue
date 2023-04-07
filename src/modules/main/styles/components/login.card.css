@@ -1,0 +1,151 @@
+.card-login {
+    position: absolute;
+    left: 5rem;
+    top: 20%;
+}
+
+.card-login-container {
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 2.5rem;
+    width: 380px;
+    white-space: nowrap;
+    background: rgba(253, 253, 253, 0.734);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 768px) {
+    .card-login {
+        top: 50%; 
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@media (max-width: 463px) {
+    .card-login-container {
+        width: 100%;
+        
+        padding: 2rem 2.5rem;
+    }
+}
+
+.card-login-container .header {
+    align-items: center;
+    color: blue;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logo {
+    color: black;
+}
+
+.text-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.sign-or-login-container {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    line-height: 12px;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.sign-or-login {
+    color: blue;
+}
+
+/* main content */
+.content .sign-in-text {
+    color: black;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.google-button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+}
+
+.btn-google {
+    text-transform: capitalize;
+    font-weight: bold;
+    width: 90%;
+}
+
+.btn-logo {
+    border-radius: 8px;
+    padding: 0 1rem;
+    /* background-color: #FFBE51; */
+    width: 20px;
+}
+
+.btn-logo img {
+    width: 10px;
+}
+
+.form-container {
+    margin-top: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    color: #313131;
+    opacity: 0.4;
+    text-transform: capitalize;
+    font-size: 12px;
+    margin-bottom: .5rem;
+    font-weight: bold;
+}
+
+.email-input,
+.password-input {
+    /* border: 1px solid blue; */
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    font-size: 13px;
+}
+
+.password-container {
+    display: flex;    
+    justify-content: space-between;
+    align-items: center;
+}
+
+.password-container p {
+    font-size: 12px;
+    text-transform: capitalize;
+    color: blue;
+}
+
+.btn-sign-in {
+    text-transform: capitalize; 
+    width: 35%;
+}
+
+@media (max-width: 463px) {
+    .content .sign-in-text {
+        font-size: 2rem;
+    }
+}
