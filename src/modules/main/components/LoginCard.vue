@@ -23,18 +23,19 @@
 
                 <!-- form -->
                 <div class="form-container">
-                    <form method="post">
+                    <form method="post" @submit.prevent="submitLoginForm">
                         <label>email address</label>
-                        <input class="email-input" type="text" placeholder="alex@gmail.com">
+                        <input class="email-input" type="text" placeholder="alex@gmail.com" v-model="email">
                         <div class="password-container">
                             <label>password</label>
                             <p>fogot password?</p>
                         </div>
                         <input class="password-input" type="password"
-                            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+                            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" v-model="password">
 
 
-                        <v-btn color="black" rounded="lg" class="btn-sign-in" size="large">Sign in</v-btn>
+                        <v-btn @click="submitLoginForm" color="black" rounded="lg" class="btn-sign-in" size="large">Sign
+                            in</v-btn>
                     </form>
                 </div>
             </main>
@@ -43,6 +44,31 @@
 </template>
 
 <script>
+
+import { ref } from 'vue';
+
+export default {
+
+    setup() {
+
+        // example@gmail.com
+        // 123456
+        const email = ref('');
+        const password = ref('');
+
+        const submitLoginForm = () => {
+            console.log("email ->", email.value);
+            console.log("password ->", password.value);
+        };
+
+
+        return {
+            email,
+            password,
+            submitLoginForm
+        }
+    }
+}
 
 </script>
 

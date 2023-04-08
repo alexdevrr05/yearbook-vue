@@ -34,6 +34,7 @@ export default {
     background-color: black;
     border-radius: 8px;
     min-height: 200px;
+    cursor: pointer;
 }
 
 .card-content {
