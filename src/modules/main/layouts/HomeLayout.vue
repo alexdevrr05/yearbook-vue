@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div v-for="user in users" :key="user.uid">
-            {{ user }}
+            <h1 class="text-white">{{ user }}</h1>
         </div>
         <router-view />
         <header-component />
@@ -25,11 +25,12 @@ export default {
         const store = useStore();
 
         onMounted(() => {
-            store.dispatch("loadUsers")
+            store.dispatch("main/loadUsers")
+            console.log(store.getters['main/getUsers']);
         });
 
         return {
-            users: store.state['users'],
+            users: computed(() => store.getters['main/getUsers']),
         }
     }
 }
