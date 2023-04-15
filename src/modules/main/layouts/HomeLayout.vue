@@ -26,7 +26,6 @@ export default {
 
         onMounted(() => {
             store.dispatch("main/loadUsers")
-            console.log(store.getters['main/getUsers']);
         });
 
         return {

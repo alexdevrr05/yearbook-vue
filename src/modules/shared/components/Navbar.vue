@@ -86,7 +86,6 @@ export default {
    top: 0;
    z-index: 1;
    background: rgba(36, 45, 53, 0.25);
-   box-shadow: 0 8px 32px 0 rgba(32, 33, 83, 0.284);
    backdrop-filter: blur(4px);
    -webkit-backdrop-filter: blur(4px);
  }

@@ -24,6 +24,15 @@ const routes = [
         '@/modules/shared/pages/LoginPage'
       ),
   },
+  {
+    path: '/register',
+    name: 'register',
+    component: () =>
+      import(
+        /* webpackChunkName: "LoginPage" */
+        '@/modules/shared/pages/LoginPage'
+      ),
+  },
 ];
 
 const router = createRouter({

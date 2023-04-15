@@ -14,37 +14,53 @@
 
             <main class="content">
                 <div class="title-container">
-                    <p class="sign-in-text">Sign in</p>
+                    <p v-if="isLoginOption" class="sign-in-text">Login</p>
+                    <p v-else class="sign-in-text">Sign in</p>
                 </div>
                 <div class="google-button-container">
                     <v-btn color="indigo-accent-2" rounded="lg" class="btn-google">Sign in with Google</v-btn>
                     <button class="btn-logo bg-orange"></button>
                 </div>
 
-                <!-- form -->
+                <!-- TODO: form login -->
                 <div class="form-container">
-                    <form method="post" @submit.prevent="submitLoginForm">
+                    <form v-if="isLoginOption" method="post" @submit.prevent="onSubmitLogin">
                         <label>email address</label>
-                        <input class="email-input" id="email" type="email" name="email" placeholder="alex@gmail.com"
-                            v-model="email">
+                        <input class="input" id="email" :error="!isEmailValid && 'Invalid email address'" type="email"
+                            name="email" placeholder="vue@gmail.com" v-model="loginEmail">
                         <div class="password-container">
                             <label>password</label>
                             <p>fogot password?</p>
                         </div>
-                        <input class="password-input" type="password"
-                            placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" v-model="password">
+                        <input class="input" type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                            v-model="loginPassword">
+
+                        <v-btn @click="onSubmitLogin" :disabled="!loginIsFormValid" color="black" rounded="lg"
+                            class="btn-sign-in" size="large">Send</v-btn>
+                    </form>
+
+                    <!-- TODO: form sign in -->
+                    <form v-else method="post" @submit.prevent="onSubmitRegister">
+                        <label>username</label>
+                        <input class="input" id="name" type="name" name="name" placeholder="vue55vuex" v-model="name">
+
+                        <label>email address</label>
+                        <input class="input" id="email" :error="!isEmailValid && 'Invalid email address'" type="email"
+                            name="email" placeholder="vue@gmail.com" v-model="email">
+                        <div class="password-container">
+                            <label>password</label>
+                            <p>fogot password?</p>
+                        </div>
+                        <input class="input" type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                            v-model="password">
 
 
-                        <template v-if="msgError">
-                            <div class="msg-error-container bg-red-darken-4">
-                                <h4>All fields required</h4>
-                            </div>
-                        </template>
-
-
-                        <v-btn @click="submitLoginForm" color="black" rounded="lg" class="btn-sign-in" size="large">Sign
+                        <v-btn @click="onSubmitRegister" :disabled="!isFormValid" color="black" rounded="lg"
+                            class="btn-sign-in" size="large">Sign
                             in</v-btn>
                     </form>
+
+
                 </div>
             </main>
         </div>
@@ -52,35 +68,46 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
-import { ref } from 'vue';
+import useRegisterForm from '@/modules/main/composables/useRegisterForm';
+import useLoginForm from '@/modules/main/composables/useLoginForm';
 
 export default {
 
     setup() {
 
-        // example@gmail.com
-        // 123456
-        const email = ref();
-        const password = ref();
-        const msgError = ref(false);
+        const { name, email, password, isEmailValid, isFormValid, register } = useRegisterForm();
+        const { login, loginEmail, loginPassword, loginIsFormValid } = useLoginForm();
+        const route = useRoute();
 
-        const submitLoginForm = () => {
-            if (!email.value || !password.value) {
-                msgError.value = true;
-                return;
-            };
-
-            console.log("email ->", email.value);
-            console.log("password ->", password.value);
+        const onSubmitRegister = () => {
+            if (isFormValid.value) {
+                register();
+            }
         };
 
+        const onSubmitLogin = () => {
+            if (loginIsFormValid.value) {
+                login();
+            }
+        };
 
         return {
+            name,
             email,
             password,
-            msgError,
-            submitLoginForm
+            isEmailValid,
+            isFormValid,
+            onSubmitRegister,
+
+            isLoginOption: computed(() => route.name === "login" ? true : false),
+
+            loginEmail,
+            loginPassword,
+            loginIsFormValid,
+            onSubmitLogin
         }
     }
 }

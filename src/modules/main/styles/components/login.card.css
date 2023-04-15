@@ -1,13 +1,13 @@
 .card-login {
     position: absolute;
     left: 5rem;
-    top: 20%;
+    top: 15%;
 }
 
 .card-login-container {
     display: flex;
     flex-direction: column;
-    padding: 4rem 2.5rem;
+    padding: 3.5rem 2.5rem;
     width: 380px;
     white-space: nowrap;
     background: rgba(253, 253, 253, 0.734);
@@ -117,8 +117,7 @@ form label {
     font-weight: bold;
 }
 
-.email-input,
-.password-input {
+.input {
     /* border: 1px solid blue; */
     margin-bottom: 1rem;
     border-radius: 10px;
@@ -152,7 +151,7 @@ form label {
 
 .msg-error-container {
     text-align: center;
-    margin-top: 1rem;
+    margin-top: .5rem;
     margin-bottom: 1rem;
     padding: 0.3rem 0;
     border-radius: 8px;
