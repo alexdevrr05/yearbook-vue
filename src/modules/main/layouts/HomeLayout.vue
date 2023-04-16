@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div v-for="user in users" :key="user.uid">
-            <h1 class="text-white">{{ user }}</h1>
+            <!-- <h1 class="text-white">{{ user }}</h1> -->
         </div>
         <router-view />
         <header-component />
