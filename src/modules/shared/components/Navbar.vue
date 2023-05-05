@@ -4,40 +4,60 @@
       <div class="navbar-logo flex-1">
         <h3>alex<span style="color: #FA983F;">.</span></h3>
       </div>
-
       <!-- logo and routes -->
       <div class="flex-3">
-        <custom-link v-for="link of links" :key="link.to" :link="link" />
+        <router-link to="home" v-slot="{ isActive }">
+          <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Home" }}</a>
+        </router-link>
+        <router-link v-if="!localStorageData" to="login" v-slot="{ isActive }">
+          <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Login" }}</a>
+        </router-link>
+        <router-link v-else to="">
+          <a class="normal-link" @click="logout">{{ "Logout" }}</a>
+        </router-link>
       </div>
-
       <!-- search and login -->
       <div class="d-flex text-white gap-1 align-center">
         <input type="search" placeholder="Search" class="search">
         <div class="example"></div>
-        <v-btn block rounded="xl" size="small" class="button min-w-u p-1" color="deep-purple">Login</v-btn>
+        <v-btn v-if="!localStorageData" block rounded="xl" size="small" class="button min-w-u p-1"
+          color="deep-purple">Login</v-btn>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
+// import { defineAsyncComponent } from 'vue';
 
 export default {
   components: {
-    CustomLink: defineAsyncComponent(() => import('./CustomLink')),
+    // CustomLink: defineAsyncComponent(() => import('./CustomLink')),
   },
 
   data() {
     return {
-      links: [
-        { to: 'home', name: 'Home' },
-        { to: 'login', name: 'Login' },
-        // { to: 'pokemon-id', name: 'By id', id: 151 },
-        // { to: 'https://google.com', name: 'Google' },
-      ],
-    };
+      localStorageData: null,
+    }
   },
+
+  created() {
+    this.localStorageData = localStorage.getItem('token') || null;
+  },
+
+  methods: {
+    logout() {
+      localStorage.removeItem('token');
+      this.localStorageData = null; 
+    }
+  },
+
+  watch: {
+    localStorageData(token) {
+      // console.log("token, ", token);
+      localStorage.setItem('token', token);
+    }    
+  }
 };
 </script>
 
@@ -104,5 +124,25 @@ export default {
 
  .navbar-logo {
    color: white;
+ }
+
+ .navbar-container a {
+   font-weight: bold;
+   color: white;
+   margin: 0 10px;
+   text-decoration: none;
+ }
+
+ .is-active {
+   border-bottom: 2px solid #FA983F;
+ }
+
+ .normal-link {
+   color: #c6c5c5;
+   opacity: 0.5;
+ }
+
+ .logout-btn {
+   cursor: pointer;
  }
 </style>

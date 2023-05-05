@@ -43,7 +43,6 @@ export default {
 
         onMounted(() => {
 
-            console.log(card.value.offsetWidth);
             if (card.value.offsetWidth > 400) {
                 acknowledgments.value = text.value.length > 200 ? text.value.substring(0, 200) + '...' : text.value;
             } else {

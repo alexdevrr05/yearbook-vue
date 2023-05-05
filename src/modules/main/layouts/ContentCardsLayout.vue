@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
 .section {
-    margin-top: 2.5rem;
+    margin-top: 6.5rem;
     color: white;
     padding: 0 2rem;
 }

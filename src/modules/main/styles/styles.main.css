@@ -39,7 +39,7 @@ a {
         grid-template-columns: repeat(2, 1fr);
         gap: 3rem;
         align-items: center;
-        padding-top: 2rem;
+        padding-top: 4rem;
     }
 
     .header__text {
@@ -51,7 +51,7 @@ a {
 @media (min-width: 1280px) { 
     .header__grid {
         padding: unset;
-        margin-top: 3rem;
+        margin-top: 6rem;
     }
 }
 
