@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
+import isAutheticatedGuard from './auth-guad';
+
 const routes = [
   {
     path: '/',
@@ -8,6 +10,7 @@ const routes = [
   {
     path: '/home',
     name: 'home',
+    beforeEnter: [isAutheticatedGuard],
     component: () =>
       import(
         /* webpackChunkName: "HomeLayout" */

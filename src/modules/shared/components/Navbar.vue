@@ -6,10 +6,10 @@
       </div>
       <!-- logo and routes -->
       <div class="flex-3">
-        <router-link to="home" v-slot="{ isActive }">
+        <router-link v-if="isLoggedIn" to="home" v-slot="{ isActive }">
           <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Home" }}</a>
         </router-link>
-        <router-link v-if="!localStorageData" to="login" v-slot="{ isActive }">
+        <router-link v-if="!isLoggedIn" to="login" v-slot="{ isActive }">
           <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Login" }}</a>
         </router-link>
         <router-link v-else to="">
@@ -20,7 +20,7 @@
       <div class="d-flex text-white gap-1 align-center">
         <input type="search" placeholder="Search" class="search">
         <div class="example"></div>
-        <v-btn v-if="!localStorageData" block rounded="xl" size="small" class="button min-w-u p-1"
+        <v-btn v-if="!isLoggedIn" block rounded="xl" size="small" class="button min-w-u p-1"
           color="deep-purple">Login</v-btn>
       </div>
     </div>
@@ -28,36 +28,41 @@
 </template>
 
 <script>
-// import { defineAsyncComponent } from 'vue';
+import { ref, computed, watch } from 'vue';
+import { useStore } from 'vuex';
+
+import useAuth from '@/modules/main/composables/useAuth';
 
 export default {
-  components: {
-    // CustomLink: defineAsyncComponent(() => import('./CustomLink')),
-  },
+  components: {},
 
-  data() {
+  setup() {
+    const store = useStore();
+
+    const localStorageData = ref(localStorage.getItem('token'));
+
+    if (localStorageData.value !== null) {
+      store.commit('main/setUserSession', { token: localStorageData.value });
+    }
+
+    const isLoggedIn = computed(() => store.state.main.userSession.token);
+    const { logout } = useAuth();
+
+
+
+    watch(
+      () => store.state.main.userSession.token,
+      (newToken) => {
+        store.state.main.userSession.token = newToken;
+      }
+    );
+
     return {
-      localStorageData: null,
+      localStorageData,
+      isLoggedIn,
+      logout,
     }
   },
-
-  created() {
-    this.localStorageData = localStorage.getItem('token') || null;
-  },
-
-  methods: {
-    logout() {
-      localStorage.removeItem('token');
-      this.localStorageData = null; 
-    }
-  },
-
-  watch: {
-    localStorageData(token) {
-      // console.log("token, ", token);
-      localStorage.setItem('token', token);
-    }    
-  }
 };
 </script>
 

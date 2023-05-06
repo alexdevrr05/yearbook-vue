@@ -77,7 +77,6 @@ import useLoginForm from '@/modules/main/composables/useLoginForm';
 export default {
 
     setup() {
-
         const { name, email, password, isEmailValid, isFormValid, register } = useRegisterForm();
         const { login, loginEmail, loginPassword, loginIsFormValid } = useLoginForm();
         const route = useRoute();

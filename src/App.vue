@@ -6,12 +6,46 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
+import { onMounted, watch } from 'vue';
+import { useStore } from 'vuex';
+
+import router from './router';
+import Navbar from '@/modules/shared/components/Navbar';
 
 export default {
   name: 'App',
   components: {
-    Navbar: defineAsyncComponent(() => import(/* webpackChunkName: "Navbar" */ '@/modules/shared/components/Navbar'))
+    Navbar,
+  },
+
+  setup() {
+    const store = useStore();
+
+    const setUserSession = (credentials) => {
+      store.state.main.userSession.token = credentials;
+    }
+
+    // onMounted(() => {
+    //   if (!localStorage.getItem('token')) {
+    //     router.push({ name: "login" });
+    //   } else {
+    //     setUserSession(localStorage.getItem('token'));
+    //   }
+    // });
+
+
+    watch(
+      () => store.state.main.userSession.token,
+      (newToken) => {
+        if (newToken) {
+          store.state.main.userSession.token = newToken;
+        } else {
+          window.location.reload();
+          router.push({ name: "login" });
+        }
+      }
+    )
+
   }
 }
 
