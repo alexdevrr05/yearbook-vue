@@ -15,7 +15,8 @@ export default {
     setup() {
         const store = useStore();
         const router = useRouter();
-        const { agradecimientos } = useAgradecimientos();
+        const agradecimientosData = useAgradecimientos();
+        const { agradecimientos, foundsQty } = agradecimientosData;
 
         onMounted(() => {
             if (store.state.main.userSession) {
@@ -38,6 +39,7 @@ export default {
         return {
             users: computed(() => store.getters['main/getUsers']),
             agradecimientos,
+            foundsQty,
         }
     }
 }
@@ -46,12 +48,9 @@ export default {
 
 <template>
     <div class="container">
-        <div v-for="user in users" :key="user.uid">
-            <!-- <h1 class="text-white">{{ user }}</h1> -->
-        </div>
         <router-view />
         <header-component />
-        <content-cards :agradecimientos="agradecimientos" />
+        <content-cards :agradecimientos="agradecimientos" :foundsQty="foundsQty" />
 
     </div>
 </template>

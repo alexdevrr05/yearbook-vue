@@ -1,20 +1,22 @@
 <template>
     <section class="section">
         <div class="container" v-motion :initial="{ opacity: 0, y: 300 }" :visibleOnce="{ opacity: 1, y: 0 }">
-
             <div v-if="agradecimientos.length <= 0" class="without-acknowledgments">
                 <h1>Comienza a dar gracias a tu maestro favorito</h1>
             </div>
 
             <template v-else>
-                <!-- {{ agradecimientos }} -->
                 <h1 class="title-cards-section">Nuestros agradecimientos</h1>
-                <p class="pb-2">Este semestre quiero dar gracias a...</p>
+                <p class="pb-2">{{ msgInformative }}</p>
                 <div class="container-cards">
                     <customized-card v-for="agradecimiento of agradecimientos" :key="agradecimiento._id"
                         :userName="agradecimiento.userName" :agradecimiento="agradecimiento.agradecimientos"
                         :color="agradecimiento.color" />
                 </div>
+
+                <v-btn v-if="foundsQty > 6" color="black" class="show-more" rounded="lg" size="small">Ver
+                    más</v-btn>
+
             </template>
         </div>
     </section>
@@ -36,6 +38,17 @@ export default {
         agradecimientos: {
             type: Array,
         },
+
+        foundsQty: {
+            type: Number,
+        }
+    },
+
+    setup() {
+
+        return {
+            msgInformative: 'Este semestre quiero dar gracias a...',
+        }
     },
 };
 </script>
@@ -45,6 +58,7 @@ export default {
     margin-top: 6.5rem;
     color: white;
     padding: 0 2rem;
+    margin-bottom: 10rem;
 }
 
 .title-cards-section {
@@ -56,7 +70,6 @@ export default {
     grid-template-columns: repeat(2, 1fr);
     padding: 1rem 0;
     gap: 0.5rem;
-    margin-bottom: 10rem;
 }
 
 @media (min-width: 768px) {
@@ -81,6 +94,9 @@ export default {
     .without-acknowledgments {
         padding-bottom: 5rem;
     }
+
+
+    .show-more {}
 
 }
 </style>
