@@ -2,7 +2,7 @@
     <section class="section">
 
         <div v-if="isLoading" class="container-spinner">
-            <PulseLoader />
+            <PulseLoader :color="colorPurple" />
         </div>
 
         <div v-else class="container">
@@ -20,14 +20,19 @@
                 </div>
 
                 <div class="container-pagination">
-                    <v-btn v-if="foundsAllsQty > 6 && currentPageQty >= 6" color="black" rounded="lg" size="small"
-                        @click="nextPage">
-                        Ver más
-                    </v-btn>
+                    <div class="container-more-or-back">
+                        <v-btn v-if="currentPage > 1" class="more-or-back-text" rounded="lg" color="#12151b" size="small"
+                            @click="prevPage">
+                            Volver
+                        </v-btn>
+                    </div>
 
-                    <v-btn v-if="currentPage > 1" color="black" rounded="lg" size="small" @click="prevPage">
-                        Volver
-                    </v-btn>
+                    <div class="container-more-or-back">
+                        <v-btn :color="colorPurple" v-if="foundsAllsQty > 6 && currentPageQty >= 6"
+                            class="more-or-back-text" rounded="lg" size="small" @click="nextPage">
+                            Ver más
+                        </v-btn>
+                    </div>
                 </div>
 
 
@@ -78,6 +83,7 @@ export default {
 
         return {
             msgInformative: 'Este semestre quiero dar gracias a...',
+            colorPurple: "#673AB7",
         }
     },
 };
@@ -131,5 +137,14 @@ export default {
         padding: 15rem;
     }
 
+    .more-or-back-text {
+        color: white;
+        font-weight: bold;
+    }
+
+    .container-pagination {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 </style>
