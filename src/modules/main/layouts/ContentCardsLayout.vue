@@ -1,6 +1,11 @@
 <template>
     <section class="section">
-        <div class="container" v-motion :initial="{ opacity: 0, y: 300 }" :visibleOnce="{ opacity: 1, y: 0 }">
+
+        <div v-if="isLoading" class="container-spinner">
+            <PulseLoader />
+        </div>
+
+        <div v-else class="container">
             <div v-if="agradecimientos.length <= 0" class="without-acknowledgments">
                 <h1>Comienza a dar gracias a tu maestro favorito</h1>
             </div>
@@ -15,13 +20,12 @@
                 </div>
 
                 <div class="container-pagination">
-                    <v-btn v-if="foundsAllsQty > 6 && currentPageQty >= 6" color="black" class="show-more" rounded="lg"
-                        size="small" @click="nextPage">
+                    <v-btn v-if="foundsAllsQty > 6 && currentPageQty >= 6" color="black" rounded="lg" size="small"
+                        @click="nextPage">
                         Ver más
                     </v-btn>
 
-                    <v-btn v-if="currentPage > 1" color="black" class="show-more" rounded="lg" size="small"
-                        @click="prevPage">
+                    <v-btn v-if="currentPage > 1" color="black" rounded="lg" size="small" @click="prevPage">
                         Volver
                     </v-btn>
                 </div>
@@ -34,6 +38,7 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
     components: {
@@ -42,6 +47,7 @@ export default {
         /* webpackChunkName: "Card" */ '@/modules/main/components/CustomizedCard'
             )
         ),
+        PulseLoader,
     },
 
     props: {
@@ -63,6 +69,9 @@ export default {
         prevPage: {
             type: Function,
         },
+        isLoading: {
+            type: Boolean,
+        }
     },
 
     setup() {
@@ -116,8 +125,11 @@ export default {
         padding-bottom: 5rem;
     }
 
-
-    .show-more {}
+    .container-spinner {
+        display: flex;
+        justify-content: center;
+        padding: 5rem;
+    }
 
 }
 </style>

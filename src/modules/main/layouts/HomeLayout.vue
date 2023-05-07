@@ -15,7 +15,7 @@ export default {
     setup() {
         const store = useStore();
         const router = useRouter();
-        const { agradecimientos, foundsAllsQty, currentPageQty, currentPage, nextPage, prevPage } = useAgradecimientos();
+        const { agradecimientos, foundsAllsQty, currentPageQty, currentPage, isLoading, nextPage, prevPage } = useAgradecimientos();
 
         onMounted(() => {
             if (store.state.main.userSession) {
@@ -41,6 +41,7 @@ export default {
             foundsAllsQty,
             currentPageQty,
             currentPage,
+            isLoading,
             nextPage,
             prevPage,
         }
@@ -53,9 +54,13 @@ export default {
     <div class="container">
         <router-view />
         <header-component />
-        <content-cards :agradecimientos="agradecimientos" :foundsAllsQty="foundsAllsQty" :currentPageQty="currentPageQty"
-            :currentPage="currentPage" :prevPage="prevPage" :nextPage="nextPage" />
 
+        <templtate>
+            <content-cards :agradecimientos="agradecimientos" :foundsAllsQty="foundsAllsQty"
+                :currentPageQty="currentPageQty" :currentPage="currentPage" :isLoading="isLoading" :prevPage="prevPage"
+                :nextPage="nextPage" />
+
+        </templtate>
     </div>
 </template>
 

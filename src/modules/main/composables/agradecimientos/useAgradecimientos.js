@@ -8,12 +8,13 @@ const useAgradecimientos = () => {
   const limite = ref(6);
   const desde = ref(0);
   const currentPageQty = ref();
+  const isLoading = ref(true);
 
   const getAgradecimientos = async (page = 1) => {
     if (page <= 0) page = 1;
 
     desde.value = (page - 1) * limite.value;
-
+    isLoading.value = true;
     const { data } = await apiDB.get('/agradecimientos', {
       params: {
         limite: limite.value,
@@ -27,6 +28,7 @@ const useAgradecimientos = () => {
       currentPageQty.value = data.currentPageQty;
 
       currentPage.value = page;
+      isLoading.value = false;
     }
   };
 
@@ -37,6 +39,7 @@ const useAgradecimientos = () => {
     foundsAllsQty,
     currentPageQty,
     currentPage,
+    isLoading,
 
     nextPage: () => getAgradecimientos(currentPage.value + 1),
     prevPage: () => getAgradecimientos(currentPage.value - 1),
