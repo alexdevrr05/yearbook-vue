@@ -55,12 +55,8 @@ export default {
         <router-view />
         <header-component />
 
-        <templtate>
-            <content-cards :agradecimientos="agradecimientos" :foundsAllsQty="foundsAllsQty"
-                :currentPageQty="currentPageQty" :currentPage="currentPage" :isLoading="isLoading" :prevPage="prevPage"
-                :nextPage="nextPage" />
-
-        </templtate>
+        <content-cards :agradecimientos="agradecimientos" :foundsAllsQty="foundsAllsQty" :currentPageQty="currentPageQty"
+            :currentPage="currentPage" :isLoading="isLoading" :prevPage="prevPage" :nextPage="nextPage" />
     </div>
 </template>
 

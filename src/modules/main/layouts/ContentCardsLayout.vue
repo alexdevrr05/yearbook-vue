@@ -128,7 +128,7 @@ export default {
     .container-spinner {
         display: flex;
         justify-content: center;
-        padding: 5rem;
+        padding: 15rem;
     }
 
 }
