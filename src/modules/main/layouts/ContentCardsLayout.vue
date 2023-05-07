@@ -14,8 +14,18 @@
                         :color="agradecimiento.color" />
                 </div>
 
-                <v-btn v-if="foundsQty > 6" color="black" class="show-more" rounded="lg" size="small">Ver
-                    más</v-btn>
+                <div class="container-pagination">
+                    <v-btn v-if="foundsAllsQty > 6 && currentPageQty >= 6" color="black" class="show-more" rounded="lg"
+                        size="small" @click="nextPage">
+                        Ver más
+                    </v-btn>
+
+                    <v-btn v-if="currentPage > 1" color="black" class="show-more" rounded="lg" size="small"
+                        @click="prevPage">
+                        Volver
+                    </v-btn>
+                </div>
+
 
             </template>
         </div>
@@ -38,10 +48,21 @@ export default {
         agradecimientos: {
             type: Array,
         },
-
-        foundsQty: {
+        foundsAllsQty: {
             type: Number,
-        }
+        },
+        currentPageQty: {
+            type: Number,
+        },
+        currentPage: {
+            type: Number,
+        },
+        nextPage: {
+            type: Function,
+        },
+        prevPage: {
+            type: Function,
+        },
     },
 
     setup() {

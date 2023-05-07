@@ -3,20 +3,43 @@ import apiDB from '@/api/apiDB';
 
 const useAgradecimientos = () => {
   const agradecimientos = ref([]);
-  const foundsQty = ref();
+  const foundsAllsQty = ref();
+  const currentPage = ref(1);
+  const limite = ref(6);
+  const desde = ref(0);
+  const currentPageQty = ref();
 
   const getAgradecimientos = async (page = 1) => {
-    const { data } = await apiDB.get('/agradecimientos');
+    if (page <= 0) page = 1;
 
-    agradecimientos.value = data.agradecimientos;
-    foundsQty.value = data.foundsQty;
+    desde.value = (page - 1) * limite.value;
+
+    const { data } = await apiDB.get('/agradecimientos', {
+      params: {
+        limite: limite.value,
+        desde: desde.value,
+      },
+    });
+
+    if (data.foundsAllsQty > 0) {
+      agradecimientos.value = data.agradecimientos;
+      foundsAllsQty.value = data.foundsAllsQty;
+      currentPageQty.value = data.currentPageQty;
+
+      currentPage.value = page;
+    }
   };
 
   getAgradecimientos();
 
   return {
     agradecimientos,
-    foundsQty,
+    foundsAllsQty,
+    currentPageQty,
+    currentPage,
+
+    nextPage: () => getAgradecimientos(currentPage.value + 1),
+    prevPage: () => getAgradecimientos(currentPage.value - 1),
   };
 };
 
