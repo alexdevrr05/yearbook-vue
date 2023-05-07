@@ -3,11 +3,56 @@
         <header class="header-imagen">
         </header>
         <login-card />
+        <div v-if="msgError">
+            {{ showAlert() }}
+        </div>
     </div>
 </template>
 
-<script setup>
+<script>
+import { createApp, computed, watch } from 'vue';
+import { useStore } from 'vuex';
 import LoginCard from '@/modules/main/components/LoginCard';
+
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+export default {
+    components: {
+        LoginCard,
+    },
+
+    setup() {
+        const app = createApp({});
+        const store = useStore();
+        const msgError = computed(() => store.state.main.errorsInLogin);
+
+        watch(
+            () => store.state.main.errorsInLogin,
+            (newErrors) => {
+                store.state.main.errorsInLogin = newErrors
+            }
+        )
+
+        app.use(VueSweetalert2);
+
+        const showAlert = () => {
+            app.config.globalProperties.$swal({
+                title: 'Autenticación',
+                text: msgError.value,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        };
+
+        return {
+            msgError,
+            showAlert,
+        }
+
+    }
+}
+
 
 </script>
 

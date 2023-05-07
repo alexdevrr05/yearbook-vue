@@ -1,5 +1,7 @@
 export default () => ({
-  userSession: { token: null },
+  userSession: {},
   users: [],
   projects: [],
+  errorsInLogin: null,
+  errorsInHome: null,
 });

@@ -8,5 +8,14 @@ export const setUserSession = (state, credentials) => {
     state.userSession = {};
   }
 
-  state.userSession.token = credentials?.token;
+  state.userSession = credentials;
+  // state.userSession.token = credentials.token;
+};
+
+export const setErrorsInLogin = (state, errors) => {
+  state.errorsInLogin = errors;
+};
+
+export const setErrorsHome = (state, errors) => {
+  state.errorsInHome = errors;
 };

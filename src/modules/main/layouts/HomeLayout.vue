@@ -11,8 +11,10 @@
 </template>
   
 <script>
-import { defineAsyncComponent, onMounted, computed } from 'vue';
+import { defineAsyncComponent, onMounted, computed, watch } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
 
 export default {
     components: {
@@ -23,10 +25,31 @@ export default {
 
     setup() {
         const store = useStore();
+        const router = useRouter();
 
         onMounted(() => {
-            store.dispatch("main/loadUsers")
+            if (store.state.main.userSession) {
+                store.dispatch("main/loadUserSession")
+                store.dispatch("main/loadUsers")
+            }
         });
+
+        const nameUserSession = computed(() => store.state.main.userSession?.nombre);
+        if (!nameUserSession) {
+            router.push({ name: "login" });
+        }
+
+
+        watch(
+            () => store.state.main.userSession,
+            (newSession) => {
+                if (newSession) {
+                    store.state.main.userSession = newSession;
+                } else {
+                    router.push('/login');
+                }
+            }
+        )
 
         return {
             users: computed(() => store.getters['main/getUsers']),

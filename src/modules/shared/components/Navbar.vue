@@ -2,7 +2,7 @@
   <div id="navbar">
     <div class="navbar-container d-flex w-100 align-center">
       <div class="navbar-logo flex-1">
-        <h3>alex<span style="color: #FA983F;">.</span></h3>
+        <h3 v-if="nameUserSession">{{ nameUserSession }}<span style="color: #FA983F;">.</span></h3>
       </div>
       <!-- logo and routes -->
       <div class="flex-3">
@@ -28,42 +28,30 @@
 </template>
 
 <script>
-import { ref, computed, watch } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
+
 
 import useAuth from '@/modules/main/composables/useAuth';
 
-export default {
+export default defineComponent({
   components: {},
 
   setup() {
     const store = useStore();
 
-    const localStorageData = ref(localStorage.getItem('token'));
-
-    if (localStorageData.value !== null) {
-      store.commit('main/setUserSession', { token: localStorageData.value });
-    }
-
-    const isLoggedIn = computed(() => store.state.main.userSession.token);
+    const isLoggedIn = computed(() => store.state.main.userSession?.token);
     const { logout } = useAuth();
-
-
-
-    watch(
-      () => store.state.main.userSession.token,
-      (newToken) => {
-        store.state.main.userSession.token = newToken;
-      }
-    );
+    const nameUserSession = computed(() => store.state.main.userSession?.nombre);
 
     return {
-      localStorageData,
+      // localStorageData,
       isLoggedIn,
       logout,
+      nameUserSession,
     }
   },
-};
+});
 </script>
 
 <style scoped> .gap-1 {

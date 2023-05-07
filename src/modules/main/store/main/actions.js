@@ -1,13 +1,25 @@
 import apiDB from '@/api/apiDB';
 import router from '@/router';
 
-export const loadUsers = async ({ commit }) => {
+export const loadUserSession = async ({ commit }) => {
   try {
-    const { data } = await apiDB.get('/usuarios', {
+    const { data } = await apiDB.get('/usuarios/loadUserSession', {
       headers: {
-        Authorization: 'Bearer ' + 'Example',
+        'x-token': `${localStorage.getItem('token')}`,
       },
     });
+
+    data.usuario.token = data.token;
+    commit('setUserSession', data.usuario);
+  } catch (error) {
+    console.log(error);
+    commit('setErrorsHome', error.response.data.msg);
+  }
+};
+
+export const loadUsers = async ({ commit }) => {
+  try {
+    const { data } = await apiDB.get('/usuarios');
     commit('setUsers', data.total);
   } catch (error) {
     console.log(error);
@@ -28,12 +40,15 @@ export const loginUser = async ({ commit }, bodyReq) => {
   try {
     // data is equal to = { email: ..., password: ... }
     const { data } = await apiDB.post('/auth/login', bodyReq);
+
+    data.usuario.token = data.token;
+
     localStorage.setItem('token', data.token);
-    commit('setUserSession', { token: localStorage.getItem('token') });
+    commit('setUserSession', data.usuario);
+    commit('setErrorsInLogin', null);
     if (data.token) router.push({ name: 'home' });
   } catch (error) {
-    const errorsList = error.response.data;
-    console.log('errorsList ->', errorsList);
+    commit('setErrorsInLogin', error.response.data.msg);
   }
 };
 
