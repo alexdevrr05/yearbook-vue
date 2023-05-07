@@ -1,19 +1,9 @@
-<template>
-    <div class="container">
-        <div v-for="user in users" :key="user.uid">
-            <!-- <h1 class="text-white">{{ user }}</h1> -->
-        </div>
-        <router-view />
-        <header-component />
-        <content-cards />
-
-    </div>
-</template>
-  
 <script>
 import { defineAsyncComponent, onMounted, computed, watch } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+
+import useAgradecimientos from '../composables/agradecimientos/useAgradecimientos';
 
 
 export default {
@@ -22,10 +12,10 @@ export default {
         ContentCards: defineAsyncComponent(() => import(/* webpackChunkName: "ContentCardsLayout" */ './ContentCardsLayout'))
     },
 
-
     setup() {
         const store = useStore();
         const router = useRouter();
+        const { agradecimientos } = useAgradecimientos();
 
         onMounted(() => {
             if (store.state.main.userSession) {
@@ -33,12 +23,6 @@ export default {
                 store.dispatch("main/loadUsers")
             }
         });
-
-        const nameUserSession = computed(() => store.state.main.userSession?.nombre);
-        if (!nameUserSession) {
-            router.push({ name: "login" });
-        }
-
 
         watch(
             () => store.state.main.userSession,
@@ -53,12 +37,25 @@ export default {
 
         return {
             users: computed(() => store.getters['main/getUsers']),
+            agradecimientos,
         }
     }
 }
 
 </script>
 
+<template>
+    <div class="container">
+        <div v-for="user in users" :key="user.uid">
+            <!-- <h1 class="text-white">{{ user }}</h1> -->
+        </div>
+        <router-view />
+        <header-component />
+        <content-cards :agradecimientos="agradecimientos" />
+
+    </div>
+</template>
+  
 <style scoped>
 .container {
     max-width: 1200px;

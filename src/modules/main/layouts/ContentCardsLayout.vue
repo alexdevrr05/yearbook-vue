@@ -1,40 +1,43 @@
 <template>
     <section class="section">
         <div class="container" v-motion :initial="{ opacity: 0, y: 300 }" :visibleOnce="{ opacity: 1, y: 0 }">
-            <h1 class="title-cards-section">Nuestros agradecimientos</h1>
-            <p class="pb-2">Este semestre quiero dar gracias a...</p>
-            <div class="container-cards">
-                <!-- color crema -->
-                <customized-card username="Alex" cardColor="#E4CDC5" />
 
-                <!-- color verde -->
-                <customized-card username="Libni" cardColor="#4CAF50" />
-
-                <!-- color rojo -->
-                <customized-card username="Ramón" cardColor="#C22F3B" />
-
-                <!-- color amarillo -->
-                <customized-card username="Cristian" cardColor="#FA983F" />
-
-                <!-- color deep gray -->
-                <customized-card username="Juan" cardColor="#12151b" />
-
-                <!-- color morado -->
-                <customized-card username="Daniela" cardColor="#673AB7" />
+            <div v-if="agradecimientos.length <= 0" class="without-acknowledgments">
+                <h1>Comienza a dar gracias a tu maestro favorito</h1>
             </div>
+
+            <template v-else>
+                <!-- {{ agradecimientos }} -->
+                <h1 class="title-cards-section">Nuestros agradecimientos</h1>
+                <p class="pb-2">Este semestre quiero dar gracias a...</p>
+                <div class="container-cards">
+                    <customized-card v-for="agradecimiento of agradecimientos" :key="agradecimiento._id"
+                        :userName="agradecimiento.userName" :agradecimiento="agradecimiento.agradecimientos"
+                        :color="agradecimiento.color" />
+                </div>
+            </template>
         </div>
     </section>
 </template>
 
 <script>
-
 import { defineAsyncComponent } from 'vue';
 
 export default {
     components: {
-        CustomizedCard: defineAsyncComponent(() => import(/* webpackChunkName: "Card" */ '@/modules/main/components/CustomizedCard'))
-    }
-}
+        CustomizedCard: defineAsyncComponent(() =>
+            import(
+        /* webpackChunkName: "Card" */ '@/modules/main/components/CustomizedCard'
+            )
+        ),
+    },
+
+    props: {
+        agradecimientos: {
+            type: Array,
+        },
+    },
+};
 </script>
 
 <style scoped>
@@ -52,12 +55,11 @@ export default {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding: 1rem 0;
-    gap: .5rem;
+    gap: 0.5rem;
     margin-bottom: 10rem;
 }
 
 @media (min-width: 768px) {
-
     .section {
         padding: unset;
     }
@@ -75,6 +77,10 @@ export default {
     .card:last-child {
         grid-column: 4 / 6;
     }
+
+    .without-acknowledgments {
+        padding-bottom: 5rem;
+    }
+
 }
 </style>
-
