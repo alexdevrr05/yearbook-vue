@@ -17,6 +17,19 @@ export const loadUserSession = async ({ commit }) => {
   }
 };
 
+// export const loadAgradecimientos = async ({ commit }, agradecimientos) => {
+//   try {
+//     // const { data } = await apiDB.get('/usuarios/loadUserSession', {
+//     //   headers: {
+//     //     'x-token': `${localStorage.getItem('token')}`,
+//     //   },
+//     // });
+//     commit('setAgradecimientos', agradecimientos);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 export const loadUsers = async ({ commit }) => {
   try {
     const { data } = await apiDB.get('/usuarios');

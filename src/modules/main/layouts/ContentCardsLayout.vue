@@ -7,7 +7,7 @@
 
         <div v-else class="container">
             <div v-if="agradecimientos.length <= 0" class="without-acknowledgments">
-                <h1>Comienza a dar gracias a tu maestro favorito</h1>
+                <h1>Comienza agradenciendo a tu maestro favorito</h1>
             </div>
 
             <template v-else>
@@ -94,7 +94,7 @@ export default {
     margin-top: 6.5rem;
     color: white;
     padding: 0 2rem;
-    margin-bottom: 10rem;
+    margin-bottom: 5rem;
 }
 
 .title-cards-section {

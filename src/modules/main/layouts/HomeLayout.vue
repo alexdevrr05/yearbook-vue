@@ -9,7 +9,8 @@ import useAgradecimientos from '../composables/agradecimientos/useAgradecimiento
 export default {
     components: {
         HeaderComponent: defineAsyncComponent(() => import(/* webpackChunkName: "Header" */ '@/modules/main/components/Header')),
-        ContentCards: defineAsyncComponent(() => import(/* webpackChunkName: "ContentCardsLayout" */ './ContentCardsLayout'))
+        ContentCards: defineAsyncComponent(() => import(/* webpackChunkName: "ContentCardsLayout" */ './ContentCardsLayout')),
+        FormLayout: defineAsyncComponent(() => import(/* webpackChunkName: "FormLayout" */ './FormLayout.vue'))
     },
 
     setup() {
@@ -33,7 +34,7 @@ export default {
                     router.push('/login');
                 }
             }
-        )
+        );
 
         return {
             users: computed(() => store.getters['main/getUsers']),
@@ -57,6 +58,7 @@ export default {
 
         <content-cards :agradecimientos="agradecimientos" :foundsAllsQty="foundsAllsQty" :currentPageQty="currentPageQty"
             :currentPage="currentPage" :isLoading="isLoading" :prevPage="prevPage" :nextPage="nextPage" />
+        <form-layout />
     </div>
 </template>
 

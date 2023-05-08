@@ -19,3 +19,7 @@ export const setErrorsInLogin = (state, errors) => {
 export const setErrorsHome = (state, errors) => {
   state.errorsInHome = errors;
 };
+
+// export const setAgradecimientos = (state, agradecimientos) => {
+//   state.agradecimientos = agradecimientos;
+// };
