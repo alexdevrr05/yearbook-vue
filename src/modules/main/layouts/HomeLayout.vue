@@ -10,7 +10,8 @@ export default {
     components: {
         HeaderComponent: defineAsyncComponent(() => import(/* webpackChunkName: "Header" */ '@/modules/main/components/Header')),
         ContentCards: defineAsyncComponent(() => import(/* webpackChunkName: "ContentCardsLayout" */ './ContentCardsLayout')),
-        FormLayout: defineAsyncComponent(() => import(/* webpackChunkName: "FormLayout" */ './FormLayout.vue'))
+        FormLayout: defineAsyncComponent(() => import(/* webpackChunkName: "FormLayout" */ './FormLayout.vue')),
+        ProjectsLayout: defineAsyncComponent(() => import(/* webpackChunkName: "FormLayout" */ './ProjectsLayout.vue'))
     },
 
     setup() {
@@ -58,6 +59,7 @@ export default {
 
         <content-cards :agradecimientos="agradecimientos" :foundsAllsQty="foundsAllsQty" :currentPageQty="currentPageQty"
             :currentPage="currentPage" :isLoading="isLoading" :prevPage="prevPage" :nextPage="nextPage" />
+        <projects-layout />
         <form-layout />
     </div>
 </template>
