@@ -86,23 +86,20 @@ const handleSubmitForm = async (text) => {
     <div class="section">
         <div class="container-form">
             <!-- form -->
-            <div class="">
-                <h1 class="motivation">Expresa tu gratitud</h1>
-                <p class="motivation">Felicidades por haber terminado este semestre, es un logro que merece ser reconocido y
-                    celebrado</p>
+            <h1 class="motivation">Expresa tu gratitud</h1>
+            <p class="motivation">Felicidades por haber terminado este semestre, es un logro que merece ser reconocido y
+                celebrado</p>
 
-                <form action="post" class="form-container">
-                    <textarea @keyup="getText($event)" :class="msgError ? 'border-red' : ''" class="ui-textarea"
-                        :placeholder="txtPlaceholder" @focus="onFocus" v-model="agradecimientoTextarea"
-                        @blur="removeFocus"></textarea>
-                    <p class="msgError" v-if="msgError">{{ msgError }}</p>
+            <form action="post" class="form-container">
+                <textarea @keyup="getText($event)" :class="msgError ? 'border-red' : ''" class="ui-textarea"
+                    :placeholder="txtPlaceholder" @focus="onFocus" v-model="agradecimientoTextarea"
+                    @blur="removeFocus"></textarea>
+                <p class="msgError" v-if="msgError">{{ msgError }}</p>
 
-                    <div class="container-button">
-                        <v-btn block class="transparent-btn"
-                            @click="handleSubmitForm(agradecimientoTextarea)">enviar</v-btn>
-                    </div>
-                </form>
-            </div>
+                <div class="container-button">
+                    <v-btn block class="transparent-btn" @click="handleSubmitForm(agradecimientoTextarea)">enviar</v-btn>
+                </div>
+            </form>
         </div>
 
         <div v-if="msgSuccess">
@@ -142,8 +139,8 @@ h1 {
 }
 
 .ui-textarea {
-    width: 70%;
-    height: 50px;
+    width: 100%;
+    height: 70px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #673AB7;
@@ -187,5 +184,26 @@ h1 {
 
 .msgError {
     color: rgb(198, 52, 52);
+}
+
+
+.container-form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+}
+
+@media (min-width: 768px) {
+    .container-form {
+        display: flex;
+        justify-content: center;
+        padding: unset;
+    }
+
+    .ui-textarea {
+        width: 70%;
+        height: 50px;
+    }
+
 }
 </style>

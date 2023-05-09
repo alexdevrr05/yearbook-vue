@@ -21,15 +21,15 @@
 
                 <div class="container-pagination">
                     <div class="container-more-or-back">
-                        <v-btn v-if="currentPage > 1" class="more-or-back-text" rounded="lg" color="#12151b" size="small"
-                            @click="prevPage">
+                        <v-btn v-if="currentPage > 1" class="more-or-back-text" rounded="lg" color="grey-darken-4"
+                            size="small" @click="prevPage">
                             Volver
                         </v-btn>
                     </div>
 
                     <div class="container-more-or-back">
-                        <v-btn :color="colorPurple" v-if="foundsAllsQty > 6 && currentPageQty >= 6"
-                            class="more-or-back-text" rounded="lg" size="small" @click="nextPage">
+                        <v-btn color="deep-purple" v-if="foundsAllsQty > 6 && currentPageQty >= 6" class="more-or-back-text"
+                            rounded="lg" size="small" @click="nextPage">
                             Ver más
                         </v-btn>
                     </div>
@@ -138,13 +138,17 @@ export default {
     }
 
     .more-or-back-text {
-        color: white;
+        color: white !important;
         font-weight: bold;
     }
 
     .container-pagination {
         display: flex;
         justify-content: space-between;
+    }
+
+    .v-btn__content {
+        color: white !important;
     }
 }
 </style>
