@@ -135,6 +135,7 @@ export default {
         display: flex;
         justify-content: center;
         padding: 15rem;
+        width: 100%;
     }
 
     .more-or-back-text {

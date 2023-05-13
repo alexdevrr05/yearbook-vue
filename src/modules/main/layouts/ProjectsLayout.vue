@@ -3,6 +3,8 @@ import useProjects from '../composables/projects/useProjects';
 
 const { projects } = useProjects();
 
+const descLengthController = (description) => description.length > 130 ? description.substring(0, 130) + '...' : description;
+
 
 </script>
 
@@ -16,10 +18,14 @@ const { projects } = useProjects();
 
             <div class="cards-container">
                 <div class="card" v-for="project in projects" :key="project._id">
-                    <img :src="project.image" :alt="project.title + 'img'">
+                    <div class="card-img-container">
+                        <img :src="'http://localhost:4000/' + project.image" :alt="project.title + 'img'">
+                    </div>
                     <h3>{{ project.title }}</h3>
-                    <p>{{ project.description }}</p>
-                    <p class="owner">{{ project.ownerProject }}</p>
+                    <div class="container-desc">
+                        <p>{{ descLengthController(project.description) }}</p>
+                    </div>
+                    <p class="owner">Creado por: {{ project.ownerProject }}</p>
                     <!-- <a href="#">Leer más</a> -->
                 </div>
             </div>
@@ -38,7 +44,7 @@ const { projects } = useProjects();
     margin-top: 3rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     gap: 10px;
 }
 
@@ -56,6 +62,9 @@ h2 {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     padding: 20px;
     flex: 0 1 calc(100% - 1rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-top: 1rem;
 }
 
@@ -65,11 +74,20 @@ h2 {
     }
 }
 
-.card img {
-    max-width: 100%;
-    height: auto;
+.card-img-container {
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+
+.container-desc {}
+
+img {
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     margin-bottom: 10px;
+    object-fit: cover;
 }
 
 .card h3 {
@@ -99,7 +117,6 @@ h2 {
 }
 
 .owner {
-    text-align: center;
     font-weight: bold;
 }
 </style>

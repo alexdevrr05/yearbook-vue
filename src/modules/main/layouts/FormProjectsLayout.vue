@@ -126,9 +126,9 @@ const onFileChange = (event) => {
                     <p class="msgError" v-if="msgError">{{ msgError }}</p>
 
                     <div class="container-button">
-                        <!-- <v-btn block class="transparent-btn"
-                            @click="handleSubmitForm(projectTitleInput, projectDescInput, onFileChange)">enviar</v-btn> -->
-                        <button type="submit">enviar</button>
+                        <v-btn block class="transparent-btn"
+                            @click="handleSubmitForm(projectTitleInput, projectDescInput, onFileChange)">enviar</v-btn>
+                        <!-- <button type="submit">enviar</button> -->
                     </div>
                 </div>
             </form>
