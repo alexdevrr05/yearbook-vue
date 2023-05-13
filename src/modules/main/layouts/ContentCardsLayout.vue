@@ -6,7 +6,7 @@
         </div>
 
         <div v-else class="container">
-            <div v-if="agradecimientos.length <= 0" class="without-acknowledgments">
+            <div v-if="agradecimientosState.length <= 0" class="without-acknowledgments">
                 <h1>Comienza agradenciendo a tu maestro favorito</h1>
             </div>
 
@@ -14,7 +14,7 @@
                 <h1 class="title-cards-section">Nuestros agradecimientos</h1>
                 <p class="pb-2">{{ msgInformative }}</p>
                 <div class="container-cards">
-                    <customized-card v-for="agradecimiento of agradecimientos" :key="agradecimiento._id"
+                    <customized-card v-for="agradecimiento of agradecimientosState" :key="agradecimiento._id"
                         :userName="agradecimiento.userName" :agradecimiento="agradecimiento.agradecimientos"
                         :color="agradecimiento.color" />
                 </div>
@@ -28,8 +28,8 @@
                     </div>
 
                     <div class="container-more-or-back">
-                        <v-btn color="deep-purple" v-if="foundsAllsQty > 6 && currentPageQty >= 6" class="more-or-back-text"
-                            rounded="lg" size="small" @click="nextPage">
+                        <v-btn color="deep-purple" v-if="foundsAllsQtyState > 6 && currentPageQty >= 6"
+                            class="more-or-back-text" rounded="lg" size="small" @click="nextPage">
                             Ver más
                         </v-btn>
                     </div>
@@ -59,7 +59,7 @@ export default {
         agradecimientos: {
             type: Array,
         },
-        foundsAllsQty: {
+        foundsAllsQtyState: {
             type: Number,
         },
         currentPageQty: {
@@ -76,6 +76,9 @@ export default {
         },
         isLoading: {
             type: Boolean,
+        },
+        agradecimientosState: {
+            type: Array,
         }
     },
 

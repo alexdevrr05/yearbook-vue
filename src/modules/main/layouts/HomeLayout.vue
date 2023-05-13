@@ -24,6 +24,7 @@ export default {
             if (store.state.main.userSession) {
                 store.dispatch("main/loadUserSession")
                 store.dispatch("main/loadUsers")
+                store.commit('main/setAgradecimientos', agradecimientos);
             }
         });
 
@@ -40,7 +41,9 @@ export default {
 
         return {
             users: computed(() => store.getters['main/getUsers']),
-            agradecimientos,
+            agradecimientosState: computed(() => store.getters['main/getAgradecimientos']),
+            foundsAllsQtyState: computed(() => store.getters['main/getAcknowledgmentsQty']),
+
             foundsAllsQty,
             currentPageQty,
             currentPage,
@@ -57,8 +60,8 @@ export default {
     <div class="container">
         <router-view />
         <header-component />
-        <content-cards :agradecimientos="agradecimientos" :foundsAllsQty="foundsAllsQty" :currentPageQty="currentPageQty"
-            :currentPage="currentPage" :isLoading="isLoading" :prevPage="prevPage" :nextPage="nextPage" />
+        <content-cards :foundsAllsQtyState="foundsAllsQtyState" :currentPageQty="currentPageQty" :currentPage="currentPage"
+            :isLoading="isLoading" :prevPage="prevPage" :nextPage="nextPage" :agradecimientosState="agradecimientosState" />
         <form-layout />
         <projects-layout />
         <form-projects-layout />

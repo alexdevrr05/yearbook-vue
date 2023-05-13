@@ -20,6 +20,10 @@ export const setErrorsHome = (state, errors) => {
   state.errorsInHome = errors;
 };
 
-// export const setAgradecimientos = (state, agradecimientos) => {
-//   state.agradecimientos = agradecimientos;
-// };
+export const setAcknowledgmentsQty = (state, acknowledgment) => {
+  state.acknowledgmentsQty = acknowledgment;
+};
+
+export const setAgradecimientos = (state, agradecimientos) => {
+  state.agradecimientos = agradecimientos;
+};

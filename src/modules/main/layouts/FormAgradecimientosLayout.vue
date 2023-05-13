@@ -49,6 +49,8 @@ const showAlert = () => {
 };
 
 const handleSubmitForm = async (text) => {
+    msgSuccess.value = null;
+
     if (text.length === 0) {
         msgError.value = 'Vamos! No seas malagradecido...';
         return
@@ -64,7 +66,9 @@ const handleSubmitForm = async (text) => {
                 msgError.value = null;
                 agradecimientoTextarea.value = '';
                 txtPlaceholder.value = originalPlaceholder.value;
-                useAgradecimientos();
+                const { agradecimientos, foundsAllsQty } = useAgradecimientos();
+                store.commit('main/setAgradecimientos', agradecimientos);
+                store.commit('main/setAcknowledgmentsQty', foundsAllsQty);
             } else {
                 msgSuccess.value = null;
                 msgError.value = response.msg;
