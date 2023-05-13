@@ -1,50 +1,9 @@
 <script setup>
-import { ref } from 'vue';
+import useProjects from '../composables/projects/useProjects';
 
-const proyectosSemestre = ref([
-    {
-        id: 1,
-        image: "https://images.unsplash.com/photo-1655501459517-3e0953fc9ab3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        title: "Proyecto 1",
-        ownerProject: "Juan Pérez",
-        description: 'Este proyecto me gustó porque...',
-    },
-    {
-        id: 2,
-        image: "https://images.unsplash.com/photo-1655501459517-3e0953fc9ab3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        title: "Proyecto 2",
-        ownerProject: "María Gutiérrez",
-        description: 'Este proyecto me gustó porque...',
-    },
-    {
-        id: 3,
-        image: "https://images.unsplash.com/photo-1655501459517-3e0953fc9ab3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        title: "Proyecto 3",
-        ownerProject: "Pedro García",
-        description: 'Este proyecto me gustó porque...',
-    },
-    {
-        id: 4,
-        image: "https://images.unsplash.com/photo-1655501459517-3e0953fc9ab3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        title: "Proyecto 4",
-        ownerProject: "Ana Rodríguez",
-        description: 'Este proyecto me gustó porque...',
-    },
-    {
-        id: 5,
-        image: "https://images.unsplash.com/photo-1655501459517-3e0953fc9ab3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        title: "Proyecto 5",
-        ownerProject: "Carlos Torres",
-        description: 'Este proyecto me gustó porque...',
-    },
-    {
-        id: 6,
-        image: "https://images.unsplash.com/photo-1655501459517-3e0953fc9ab3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
-        title: "Proyecto 6",
-        ownerProject: "Laura Martínez",
-        description: 'Este proyecto me gustó porque...',
-    }
-]);
+const { projects } = useProjects();
+
+
 </script>
 
 <template>
@@ -56,11 +15,12 @@ const proyectosSemestre = ref([
             </div>
 
             <div class="cards-container">
-                <div class="card" v-for="project in proyectosSemestre" :key="project.id">
+                <div class="card" v-for="project in projects" :key="project._id">
                     <img :src="project.image" :alt="project.title + 'img'">
                     <h3>{{ project.title }}</h3>
                     <p>{{ project.description }}</p>
-                    <a href="#">Leer más</a>
+                    <p class="owner">{{ project.ownerProject }}</p>
+                    <!-- <a href="#">Leer más</a> -->
                 </div>
             </div>
 
@@ -136,5 +96,10 @@ h2 {
 
 .card a:hover {
     background-color: #0062cc;
+}
+
+.owner {
+    text-align: center;
+    font-weight: bold;
 }
 </style>

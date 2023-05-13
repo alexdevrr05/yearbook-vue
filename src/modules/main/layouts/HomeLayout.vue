@@ -10,8 +10,9 @@ export default {
     components: {
         HeaderComponent: defineAsyncComponent(() => import(/* webpackChunkName: "Header" */ '@/modules/main/components/Header')),
         ContentCards: defineAsyncComponent(() => import(/* webpackChunkName: "ContentCardsLayout" */ './ContentCardsLayout')),
-        FormLayout: defineAsyncComponent(() => import(/* webpackChunkName: "FormLayout" */ './FormLayout.vue')),
-        ProjectsLayout: defineAsyncComponent(() => import(/* webpackChunkName: "FormLayout" */ './ProjectsLayout.vue'))
+        FormLayout: defineAsyncComponent(() => import(/* webpackChunkName: "FormAgradecimientosLayout" */ './FormAgradecimientosLayout.vue')),
+        ProjectsLayout: defineAsyncComponent(() => import(/* webpackChunkName: "ProjectsLayout" */ './ProjectsLayout.vue')),
+        FormProjectsLayout: defineAsyncComponent(() => import(/* webpackChunkName: "FormProjectsLayout" */ './FormProjectsLayout.vue'))
     },
 
     setup() {
@@ -56,11 +57,11 @@ export default {
     <div class="container">
         <router-view />
         <header-component />
-
         <content-cards :agradecimientos="agradecimientos" :foundsAllsQty="foundsAllsQty" :currentPageQty="currentPageQty"
             :currentPage="currentPage" :isLoading="isLoading" :prevPage="prevPage" :nextPage="nextPage" />
-        <projects-layout />
         <form-layout />
+        <projects-layout />
+        <form-projects-layout />
     </div>
 </template>
 
