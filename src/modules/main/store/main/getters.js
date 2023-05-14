@@ -9,5 +9,4 @@ export const getAllFoundsAcknowledgmentsQty = (state) =>
 export const getCurrentPageAcknowledgmentsQty = (state) =>
   state.currentPageAcknowledgmentsQty;
 
-export const getCurrentNumberPage = (state) =>
-  state.currentNumberPageAcknowledgments;
+export const getCurrentNumberPage = (state) => state.currentNumberPage;

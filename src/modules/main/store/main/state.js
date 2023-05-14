@@ -10,4 +10,5 @@ export default () => ({
   foundsAllAcknowledgmentsQty: 0,
   currentPageAcknowledgmentsQty: 0,
   currentNumberPageAcknowledgments: 0,
+  currentNumberPage: 1,
 });

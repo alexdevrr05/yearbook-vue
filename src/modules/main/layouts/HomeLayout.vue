@@ -28,7 +28,7 @@ export default {
 
                 store.commit('main/setAllFoundsAcknowledgmentsQty', foundsAllsQty);
                 store.commit('main/setCurrentPageAcknowledgmentsQty', currentPageQty);
-                store.commit('main/setCurrentNumberPage', currentPage);
+                // store.commit('main/setCurrentNumberPage', currentPage);
             }
         });
 
@@ -48,9 +48,9 @@ export default {
             agradecimientosState: computed(() => store.getters['main/getAgradecimientos']),
             foundsAllsQtyState: computed(() => store.getters['main/getAllFoundsAcknowledgmentsQty']),
             currentPageQty: computed(() => store.getters['main/getCurrentPageAcknowledgmentsQty']),
-            // currentPage: computed(() => store.getters['main/getCurrentNumberPage']),
+            currentPage: computed(() => store.getters['main/getCurrentNumberPage']),
 
-            currentPage,
+            // currentPage,
             isLoading,
             nextPage,
             prevPage,

@@ -37,5 +37,5 @@ export const setCurrentPageAcknowledgmentsQty = (state, currentPageQty) => {
 };
 
 export const setCurrentNumberPage = (state, currentNumberPage) => {
-  state.currentNumberPageAcknowledgments = currentNumberPage;
+  state.currentNumberPage = currentNumberPage;
 };

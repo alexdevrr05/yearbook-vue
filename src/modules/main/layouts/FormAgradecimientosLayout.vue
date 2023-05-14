@@ -12,7 +12,7 @@ const store = useStore();
 
 const originalPlaceholder = ref('Reconoce y honra el esfuerzo de los demás...');
 const txtPlaceholder = ref(originalPlaceholder.value);
-const agradecimientoTextarea = ref('');
+const agradecimientoTextarea = ref('Felicidades por haber terminado este semestre');
 const msgError = ref();
 const msgSuccess = ref();
 const isActiveModal = ref(false);
@@ -70,7 +70,7 @@ const handleSubmitForm = async (text) => {
                 msgError.value = null;
                 agradecimientoTextarea.value = '';
                 txtPlaceholder.value = originalPlaceholder.value;
-                const { agradecimientos, foundsAllsQty, currentPageQty } = useAgradecimientos(store);
+                const { agradecimientos, foundsAllsQty, currentPageQty, currentPage } = useAgradecimientos(store);
 
                 store.commit('main/setAgradecimientos', agradecimientos);
                 store.commit('main/setAllFoundsAcknowledgmentsQty', foundsAllsQty);

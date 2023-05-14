@@ -32,8 +32,9 @@ const useAgradecimientos = (store) => {
         data.currentPageQty
       );
       store.commit('main/setAgradecimientos', data.agradecimientos);
+      store.commit('main/setCurrentNumberPage', page);
 
-      currentPage.value = page;
+      // currentPage.value = page;
       isLoading.value = false;
     }
   };
