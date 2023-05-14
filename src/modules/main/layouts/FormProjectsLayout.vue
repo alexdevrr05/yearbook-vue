@@ -21,19 +21,22 @@ const projectDescInput = ref('');
 
 const msgError = ref();
 const msgSuccess = ref();
+const isActiveModal = ref(false);
 const currentUserSession = ref(computed(() => store.getters[['main/getUserSession']]));
-const file = ref();
+const file = ref(null);
 
 const app = createApp({});
 
 const onFocus = () => {
     txtPlaceholder.value = '';
+    isActiveModal.value = false;
 }
 
 const removeFocus = () => {
     txtPlaceholder.value = originalPlaceholder.value;
     msgSuccess.value = null;
     msgError.value = null;
+    isActiveModal.value = false;
 }
 
 const getText = ($event) => {
@@ -42,6 +45,7 @@ const getText = ($event) => {
         txtPlaceholder.value = originalPlaceholder.value;
         msgSuccess.value = null;
         msgError.value = null;
+        isActiveModal.value = false;
     }
 }
 
@@ -55,6 +59,8 @@ const showAlert = () => {
     });
 };
 
+const isValidForm = computed(() => projectTitleInput.value.length <= 10 || projectDescInput.value.length <= 10 || !file.value);
+
 const handleSubmitForm = async () => {
     const formData = new FormData()
 
@@ -65,7 +71,7 @@ const handleSubmitForm = async () => {
     formData.append('file', file.value);
     formData.append('ownerProject', userName);
 
-    if (projectDescInput.value.length === 0 || projectTitleInput.value.length === 0) {
+    if (projectDescInput.value.length === 0 || projectTitleInput.value.length === 0 || !file.value) {
         msgError.value = 'Todos los campos son obligatorios...';
         return
     }
@@ -75,11 +81,15 @@ const handleSubmitForm = async () => {
             if (response.status === 200) {
                 msgSuccess.value = response.msg;
                 msgError.value = null;
+                projectDescInput.value = '';
                 projectTitleInput.value = '';
+                file.value.value = null;
                 txtPlaceholder.value = originalPlaceholder.value;
                 txtPlaceholderProjectDesc.value = originalPlaceholderProjectDesc.value;
 
-                useProjects();
+                const { projects } = useProjects(store);
+                store.commit('main/setProjects', projects);
+                isActiveModal.value = true;
             } else {
                 msgSuccess.value = null;
                 msgError.value = response.msg;
@@ -126,7 +136,7 @@ const onFileChange = (event) => {
                     <p class="msgError" v-if="msgError">{{ msgError }}</p>
 
                     <div class="container-button">
-                        <v-btn block class="transparent-btn"
+                        <v-btn block class="transparent-btn" :disabled="isValidForm"
                             @click="handleSubmitForm(projectTitleInput, projectDescInput, onFileChange)">enviar</v-btn>
                         <!-- <button type="submit">enviar</button> -->
                     </div>
@@ -134,7 +144,7 @@ const onFileChange = (event) => {
             </form>
         </div>
 
-        <div v-if="msgSuccess">
+        <div v-if="isActiveModal">
             {{ showAlert() }}
         </div>
 

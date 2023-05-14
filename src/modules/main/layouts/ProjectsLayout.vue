@@ -1,10 +1,23 @@
 <script setup>
-import useProjects from '../composables/projects/useProjects';
+import { computed, defineProps } from 'vue';
+import { useStore } from 'vuex';
 
-const { projects } = useProjects();
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+
+const store = useStore();
+
+const projectsState = computed(() => store.getters['main/getProjects']);
 
 const descLengthController = (description) => description.length > 130 ? description.substring(0, 130) + '...' : description;
+const titleLengthController = (title) => title.length > 40 ? title.substring(0, 40) + '...' : title;
 
+const colorPurple = "#673AB7";
+
+const props = defineProps({
+    isLoading: {
+        type: Boolean,
+    },
+});
 
 </script>
 
@@ -16,16 +29,20 @@ const descLengthController = (description) => description.length > 130 ? descrip
                 <h2 class="text-center">¡Mira nuestros proyectos del semestre!</h2>
             </div>
 
-            <div class="cards-container">
-                <div class="card" v-for="project in projects" :key="project._id">
+            <div v-if="props.isLoading" class="container-spinner">
+                <PulseLoader :color="colorPurple" />
+            </div>
+
+            <div v-else class="cards-container">
+                <div class="card" v-for="project in projectsState" :key="project._id">
                     <div class="card-img-container">
                         <img :src="'http://localhost:4000/' + project.image" :alt="project.title + 'img'">
                     </div>
-                    <h3>{{ project.title }}</h3>
                     <div class="container-desc">
+                        <h4 class="title-card">{{ titleLengthController(project.title) }}</h4>
                         <p>{{ descLengthController(project.description) }}</p>
+                        <p class="owner">Creado por: {{ project.ownerProject }}</p>
                     </div>
-                    <p class="owner">Creado por: {{ project.ownerProject }}</p>
                     <!-- <a href="#">Leer más</a> -->
                 </div>
             </div>
@@ -38,6 +55,11 @@ const descLengthController = (description) => description.length > 130 ? descrip
 .section {
     color: white;
     margin-bottom: 5rem;
+}
+
+.container {
+    width: 100%;
+    min-height: 766px;
 }
 
 .cards-container {
@@ -66,6 +88,7 @@ h2 {
     flex-direction: column;
     justify-content: space-between;
     margin-top: 1rem;
+    max-height: 400px;
 }
 
 @media (min-width: 463px) {
@@ -80,7 +103,16 @@ h2 {
 }
 
 
-.container-desc {}
+.title-card {
+    line-height: 22px;
+}
+
+.container-desc {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 img {
     width: 100%;
@@ -88,6 +120,14 @@ img {
     border-radius: 5px;
     margin-bottom: 10px;
     object-fit: cover;
+}
+
+.container-spinner {
+    display: flex;
+    justify-content: center;
+    /*padding: 15rem;*/
+    padding: 5rem 0;
+    width: 100%;
 }
 
 .card h3 {

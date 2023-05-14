@@ -1,20 +1,20 @@
 import { ref } from 'vue';
 import apiDB from '@/api/apiDB';
 
-const useProjects = () => {
+const useProjects = (store) => {
   const projects = ref([]);
   const foundsAllsQty = ref();
   const currentPage = ref(1);
   const limite = ref(6);
   const desde = ref(0);
   const currentPageQty = ref();
-  const isLoading = ref(true);
+  const isLoadingProjects = ref(true);
 
   const getProjects = async (page = 1) => {
     if (page <= 0) page = 1;
 
     desde.value = (page - 1) * limite.value;
-    isLoading.value = true;
+    isLoadingProjects.value = true;
     const { data } = await apiDB.get('/projects', {
       params: {
         limite: limite.value,
@@ -28,7 +28,9 @@ const useProjects = () => {
       currentPageQty.value = data.currentPageQty;
 
       currentPage.value = page;
-      isLoading.value = false;
+      isLoadingProjects.value = false;
+
+      store.commit('main/setProjects', data.projects);
     }
   };
 
@@ -39,11 +41,13 @@ const useProjects = () => {
     foundsAllsQty,
     currentPageQty,
     currentPage,
-    isLoading,
+    isLoadingProjects,
 
     nextPage: () => getProjects(currentPage.value + 1),
     prevPage: () => getProjects(currentPage.value - 1),
   };
 };
 
-export default useProjects;
+export default (store) => {
+  return useProjects(store);
+};

@@ -70,7 +70,7 @@ const handleSubmitForm = async (text) => {
                 msgError.value = null;
                 agradecimientoTextarea.value = '';
                 txtPlaceholder.value = originalPlaceholder.value;
-                const { agradecimientos, foundsAllsQty, currentPageQty, currentPage } = useAgradecimientos(store);
+                const { agradecimientos, foundsAllsQty, currentPageQty } = useAgradecimientos(store);
 
                 store.commit('main/setAgradecimientos', agradecimientos);
                 store.commit('main/setAllFoundsAcknowledgmentsQty', foundsAllsQty);

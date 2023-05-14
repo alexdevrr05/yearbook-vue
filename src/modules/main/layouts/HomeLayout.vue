@@ -4,6 +4,7 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
 import useAgradecimientos from '../composables/agradecimientos/useAgradecimientos';
+import useProjects from '../composables/projects/useProjects';
 
 
 export default {
@@ -18,7 +19,8 @@ export default {
     setup() {
         const store = useStore();
         const router = useRouter();
-        const { agradecimientos, foundsAllsQty, currentPageQty, currentPage, isLoading, nextPage, prevPage } = useAgradecimientos(store);
+        const { agradecimientos, foundsAllsQty, currentPageQty, isLoading, nextPage, prevPage } = useAgradecimientos(store);
+        const { isLoadingProjects } = useProjects(store);
 
         onMounted(() => {
             if (store.state.main.userSession) {
@@ -52,6 +54,8 @@ export default {
 
             // currentPage,
             isLoading,
+            isLoadingProjects,
+
             nextPage,
             prevPage,
         }
@@ -67,7 +71,7 @@ export default {
         <content-cards :foundsAllsQtyState="foundsAllsQtyState" :currentPageQty="currentPageQty" :currentPage="currentPage"
             :isLoading="isLoading" :prevPage="prevPage" :nextPage="nextPage" :agradecimientosState="agradecimientosState" />
         <form-layout />
-        <projects-layout />
+        <projects-layout :isLoading="isLoadingProjects" />
         <form-projects-layout />
     </div>
 </template>
