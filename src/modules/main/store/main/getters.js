@@ -8,3 +8,9 @@ export const getCurrentPageAcknowledgmentsQty = (state) =>
   state.currentPageAcknowledgmentsQty;
 export const getCurrentNumberPage = (state) => state.currentNumberPage;
 export const getProjects = (state) => state.projects;
+
+export const getCurrentNumberPageProjects = (state) =>
+  state.currentNumberPageProjects;
+export const getAllFoundsProjectsQty = (state) => state.projectsQty;
+
+export const getCurrentPageProjectsQty = (state) => state.currentProjectsQty;

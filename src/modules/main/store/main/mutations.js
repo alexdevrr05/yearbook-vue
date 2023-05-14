@@ -43,3 +43,14 @@ export const setCurrentNumberPage = (state, currentNumberPage) => {
 export const setProjects = (state, projects) => {
   state.projects = projects;
 };
+
+export const setCurrentNumberPageProjects = (state, currentNumberPage) => {
+  state.currentNumberPageProjects = currentNumberPage;
+};
+
+export const setAllFoundsProjectsQty = (state, foundsProjectsQty) => {
+  state.projectsQty = foundsProjectsQty;
+};
+export const setCurrentPageProjectsQty = (state, currentProjectsQty) => {
+  state.currentProjectsQty = currentProjectsQty;
+};

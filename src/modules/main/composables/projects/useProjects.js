@@ -3,16 +3,15 @@ import apiDB from '@/api/apiDB';
 
 const useProjects = (store) => {
   const projects = ref([]);
-  const foundsAllsQty = ref();
+  const foundsAllsQtyProjects = ref();
   const currentPage = ref(1);
   const limite = ref(6);
   const desde = ref(0);
-  const currentPageQty = ref();
+  const currentPageQtyProjects = ref();
   const isLoadingProjects = ref(true);
 
   const getProjects = async (page = 1) => {
     if (page <= 0) page = 1;
-
     desde.value = (page - 1) * limite.value;
     isLoadingProjects.value = true;
     const { data } = await apiDB.get('/projects', {
@@ -24,13 +23,17 @@ const useProjects = (store) => {
 
     if (data.foundsAllsQty > 0) {
       projects.value = data.projects;
-      foundsAllsQty.value = data.foundsAllsQty;
-      currentPageQty.value = data.currentPageQty;
+      foundsAllsQtyProjects.value = data.foundsAllsQty;
+      currentPageQtyProjects.value = data.currentPageQty;
 
-      currentPage.value = page;
+      // currentPage.value = page;
       isLoadingProjects.value = false;
 
+      console.log('data.projects ->', data.projects);
       store.commit('main/setProjects', data.projects);
+      store.commit('main/setAllFoundsProjectsQty', data.foundsAllsQty);
+      store.commit('main/setCurrentNumberPageProjects', page);
+      store.commit('main/setCurrentPageProjectsQty', data.currentPageQty);
     }
   };
 
@@ -38,13 +41,13 @@ const useProjects = (store) => {
 
   return {
     projects,
-    foundsAllsQty,
-    currentPageQty,
+    foundsAllsQtyProjects,
+    currentPageQtyProjects,
     currentPage,
     isLoadingProjects,
 
-    nextPage: () => getProjects(currentPage.value + 1),
-    prevPage: () => getProjects(currentPage.value - 1),
+    prevPageProjects: () => getProjects(currentPage.value - 1),
+    nextPageProjects: () => getProjects(currentPage.value + 1),
   };
 };
 

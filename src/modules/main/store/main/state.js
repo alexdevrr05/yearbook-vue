@@ -11,4 +11,8 @@ export default () => ({
   currentPageAcknowledgmentsQty: 0,
   currentNumberPageAcknowledgments: 0,
   currentNumberPage: 1,
+
+  currentNumberPageProjects: 1,
+  projectsQty: 0,
+  currentProjectsQty: 0,
 });

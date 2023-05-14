@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineProps } from 'vue';
+import { computed, defineProps, ref } from 'vue';
 import { useStore } from 'vuex';
 
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
@@ -11,11 +11,26 @@ const projectsState = computed(() => store.getters['main/getProjects']);
 const descLengthController = (description) => description.length > 130 ? description.substring(0, 130) + '...' : description;
 const titleLengthController = (title) => title.length > 40 ? title.substring(0, 40) + '...' : title;
 
-const colorPurple = "#673AB7";
+const colorPurple = ref("#673AB7");
 
 const props = defineProps({
+    foundsAllsQtyState: {
+        type: Number,
+    },
+    currentPageQty: {
+        type: Number,
+    },
     isLoading: {
         type: Boolean,
+    },
+    nextPage: {
+        type: Function,
+    },
+    prevPage: {
+        type: Function,
+    },
+    currentPage: {
+        type: Number,
     },
 });
 
@@ -44,6 +59,22 @@ const props = defineProps({
                         <p class="owner">Creado por: {{ project.ownerProject }}</p>
                     </div>
                     <!-- <a href="#">Leer más</a> -->
+                </div>
+            </div>
+
+            <div class="container-pagination">
+                <div class="container-more-or-back">
+                    <v-btn v-if="props.currentPage > 1" class="more-or-back-text" rounded="lg" color="grey-darken-4"
+                        size="small" @click="props.prevPage">
+                        Volver
+                    </v-btn>
+                </div>
+
+                <div class="container-more-or-back">
+                    <v-btn color="deep-purple" v-if="props.foundsAllsQtyState > 6 && props.currentPageQty >= 6"
+                        class="more-or-back-text" rounded="lg" size="small" @click="props.nextPage">
+                        Ver más
+                    </v-btn>
                 </div>
             </div>
 
@@ -95,6 +126,13 @@ h2 {
     .card {
         flex: 0 1 calc(33% - 1rem);
     }
+}
+
+.container-pagination {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .card-img-container {

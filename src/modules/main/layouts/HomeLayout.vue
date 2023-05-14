@@ -20,7 +20,7 @@ export default {
         const store = useStore();
         const router = useRouter();
         const { agradecimientos, foundsAllsQty, currentPageQty, isLoading, nextPage, prevPage } = useAgradecimientos(store);
-        const { isLoadingProjects } = useProjects(store);
+        const { isLoadingProjects, foundsAllsQtyProjects, currentPageQtyProjects, prevPageProjects, nextPageProjects } = useProjects(store);
 
         onMounted(() => {
             if (store.state.main.userSession) {
@@ -31,6 +31,9 @@ export default {
                 store.commit('main/setAllFoundsAcknowledgmentsQty', foundsAllsQty);
                 store.commit('main/setCurrentPageAcknowledgmentsQty', currentPageQty);
                 // store.commit('main/setCurrentNumberPage', currentPage);
+
+                store.commit('main/setAllFoundsProjectsQty', foundsAllsQtyProjects);
+                store.commit('main/setCurrentPageProjectsQty', currentPageQtyProjects);
             }
         });
 
@@ -52,10 +55,17 @@ export default {
             currentPageQty: computed(() => store.getters['main/getCurrentPageAcknowledgmentsQty']),
             currentPage: computed(() => store.getters['main/getCurrentNumberPage']),
 
+            foundsAllsQtyProjects: computed(() => store.getters['main/getAllFoundsProjectsQty']),
+            currentPageQtyProjects: computed(() => store.getters['main/getCurrentPageProjectsQty']),
+            currentPageProject: computed(() => store.getters['main/getCurrentNumberPageProjects']),
+
             // currentPage,
             isLoading,
             isLoadingProjects,
 
+
+            prevPageProjects,
+            nextPageProjects,
             nextPage,
             prevPage,
         }
@@ -71,7 +81,9 @@ export default {
         <content-cards :foundsAllsQtyState="foundsAllsQtyState" :currentPageQty="currentPageQty" :currentPage="currentPage"
             :isLoading="isLoading" :prevPage="prevPage" :nextPage="nextPage" :agradecimientosState="agradecimientosState" />
         <form-layout />
-        <projects-layout :isLoading="isLoadingProjects" />
+        <projects-layout :isLoading="isLoadingProjects" :prevPage="prevPageProjects" :nextPage="nextPageProjects"
+            :foundsAllsQtyState="foundsAllsQtyProjects" :currentPageQty="currentPageQtyProjects"
+            :currentPage="currentPageProject" />
         <form-projects-layout />
     </div>
 </template>
