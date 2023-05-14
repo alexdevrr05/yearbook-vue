@@ -6,7 +6,7 @@
                 image="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80">
             </v-avatar>
             <div class="title-username">
-                <h1>{{ userName }}</h1>
+                <h2>{{ userName }}</h2>
             </div>
             <div class="acknowledgments">
                 <v-card-text class="text-h6">
@@ -75,6 +75,10 @@ export default {
 
 .v-card-text {
     padding: unset
+}
+
+.text-h6 {
+    line-height: 19px;
 }
 </style>
 

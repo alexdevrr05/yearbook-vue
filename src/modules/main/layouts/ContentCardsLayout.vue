@@ -32,7 +32,6 @@
                 </div>
             </div>
         </template>
-        {{ currentPage }}
     </section>
 </template>
 
