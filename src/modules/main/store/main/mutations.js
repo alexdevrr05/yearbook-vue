@@ -27,3 +27,15 @@ export const setAcknowledgmentsQty = (state, acknowledgment) => {
 export const setAgradecimientos = (state, agradecimientos) => {
   state.agradecimientos = agradecimientos;
 };
+
+export const setAllFoundsAcknowledgmentsQty = (state, currentPageQty) => {
+  state.foundsAllAcknowledgmentsQty = currentPageQty;
+};
+
+export const setCurrentPageAcknowledgmentsQty = (state, currentPageQty) => {
+  state.currentPageAcknowledgmentsQty = currentPageQty;
+};
+
+export const setCurrentNumberPage = (state, currentNumberPage) => {
+  state.currentNumberPageAcknowledgments = currentNumberPage;
+};

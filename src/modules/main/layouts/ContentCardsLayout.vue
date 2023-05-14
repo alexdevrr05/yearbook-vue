@@ -1,43 +1,38 @@
 <template>
     <section class="section">
+        <div class="container-titles">
+            <h1 class="title-cards-section">Nuestros agradecimientos</h1>
+            <p class="pb-2">{{ msgInformative }}</p>
+        </div>
 
         <div v-if="isLoading" class="container-spinner">
             <PulseLoader :color="colorPurple" />
         </div>
 
-        <div v-else class="container">
-            <div v-if="agradecimientosState.length <= 0" class="without-acknowledgments">
-                <h1>Comienza agradenciendo a tu maestro favorito</h1>
+        <template v-else>
+            <div class="container-cards">
+                <customized-card v-for="agradecimiento of agradecimientosState" :key="agradecimiento._id"
+                    :userName="agradecimiento.userName" :agradecimiento="agradecimiento.agradecimientos"
+                    :color="agradecimiento.color" />
             </div>
 
-            <template v-else>
-                <h1 class="title-cards-section">Nuestros agradecimientos</h1>
-                <p class="pb-2">{{ msgInformative }}</p>
-                <div class="container-cards">
-                    <customized-card v-for="agradecimiento of agradecimientosState" :key="agradecimiento._id"
-                        :userName="agradecimiento.userName" :agradecimiento="agradecimiento.agradecimientos"
-                        :color="agradecimiento.color" />
+            <div class="container-pagination">
+                <div class="container-more-or-back">
+                    <v-btn v-if="currentPage > 1" class="more-or-back-text" rounded="lg" color="grey-darken-4" size="small"
+                        @click="prevPage">
+                        Volver
+                    </v-btn>
                 </div>
 
-                <div class="container-pagination">
-                    <div class="container-more-or-back">
-                        <v-btn v-if="currentPage > 1" class="more-or-back-text" rounded="lg" color="grey-darken-4"
-                            size="small" @click="prevPage">
-                            Volver
-                        </v-btn>
-                    </div>
-
-                    <div class="container-more-or-back">
-                        <v-btn color="deep-purple" v-if="foundsAllsQtyState > 6 && currentPageQty >= 6"
-                            class="more-or-back-text" rounded="lg" size="small" @click="nextPage">
-                            Ver más
-                        </v-btn>
-                    </div>
+                <div class="container-more-or-back">
+                    <v-btn color="deep-purple" v-if="foundsAllsQtyState > 6 && currentPageQty >= 6"
+                        class="more-or-back-text" rounded="lg" size="small" @click="nextPage">
+                        Ver más
+                    </v-btn>
                 </div>
-
-
-            </template>
-        </div>
+            </div>
+        </template>
+        {{ currentPage }}
     </section>
 </template>
 
@@ -98,10 +93,17 @@ export default {
     color: white;
     padding: 0 2rem;
     margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .title-cards-section {
     font-size: 2.5rem;
+}
+
+.container-titles {
+    text-align: start;
 }
 
 .container-cards {
@@ -109,6 +111,7 @@ export default {
     grid-template-columns: repeat(2, 1fr);
     padding: 1rem 0;
     gap: 0.5rem;
+    width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -118,6 +121,7 @@ export default {
 
     .container-cards {
         grid-template-columns: repeat(5, 1fr);
+        min-height: 440px;
     }
 
     .card:nth-child(2) {
@@ -137,7 +141,8 @@ export default {
     .container-spinner {
         display: flex;
         justify-content: center;
-        padding: 15rem;
+        /*padding: 15rem;*/
+        padding: 5rem 0;
         width: 100%;
     }
 
@@ -149,6 +154,7 @@ export default {
     .container-pagination {
         display: flex;
         justify-content: space-between;
+        width: 100%;
     }
 
     .v-btn__content {

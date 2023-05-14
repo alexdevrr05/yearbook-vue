@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import apiDB from '@/api/apiDB';
 
-const useAgradecimientos = () => {
+const useAgradecimientos = (store) => {
   const agradecimientos = ref([]);
   const foundsAllsQty = ref();
   const currentPage = ref(1);
@@ -27,6 +27,12 @@ const useAgradecimientos = () => {
       foundsAllsQty.value = data.foundsAllsQty;
       currentPageQty.value = data.currentPageQty;
 
+      store.commit(
+        'main/setCurrentPageAcknowledgmentsQty',
+        data.currentPageQty
+      );
+      store.commit('main/setAgradecimientos', data.agradecimientos);
+
       currentPage.value = page;
       isLoading.value = false;
     }
@@ -46,4 +52,6 @@ const useAgradecimientos = () => {
   };
 };
 
-export default useAgradecimientos;
+export default (store) => {
+  return useAgradecimientos(store);
+};

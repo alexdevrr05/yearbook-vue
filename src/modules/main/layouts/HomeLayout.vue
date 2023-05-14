@@ -18,13 +18,17 @@ export default {
     setup() {
         const store = useStore();
         const router = useRouter();
-        const { agradecimientos, foundsAllsQty, currentPageQty, currentPage, isLoading, nextPage, prevPage } = useAgradecimientos();
+        const { agradecimientos, foundsAllsQty, currentPageQty, currentPage, isLoading, nextPage, prevPage } = useAgradecimientos(store);
 
         onMounted(() => {
             if (store.state.main.userSession) {
                 store.dispatch("main/loadUserSession")
                 store.dispatch("main/loadUsers")
                 store.commit('main/setAgradecimientos', agradecimientos);
+
+                store.commit('main/setAllFoundsAcknowledgmentsQty', foundsAllsQty);
+                store.commit('main/setCurrentPageAcknowledgmentsQty', currentPageQty);
+                store.commit('main/setCurrentNumberPage', currentPage);
             }
         });
 
@@ -42,10 +46,10 @@ export default {
         return {
             users: computed(() => store.getters['main/getUsers']),
             agradecimientosState: computed(() => store.getters['main/getAgradecimientos']),
-            foundsAllsQtyState: computed(() => store.getters['main/getAcknowledgmentsQty']),
+            foundsAllsQtyState: computed(() => store.getters['main/getAllFoundsAcknowledgmentsQty']),
+            currentPageQty: computed(() => store.getters['main/getCurrentPageAcknowledgmentsQty']),
+            // currentPage: computed(() => store.getters['main/getCurrentNumberPage']),
 
-            foundsAllsQty,
-            currentPageQty,
             currentPage,
             isLoading,
             nextPage,

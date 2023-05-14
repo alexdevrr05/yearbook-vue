@@ -15,18 +15,21 @@ const txtPlaceholder = ref(originalPlaceholder.value);
 const agradecimientoTextarea = ref('');
 const msgError = ref();
 const msgSuccess = ref();
+const isActiveModal = ref(false);
 const currentUserSession = ref(computed(() => store.getters[['main/getUserSession']]));
 
 const app = createApp({});
 
 const onFocus = () => {
     txtPlaceholder.value = '';
+    isActiveModal.value = false;
 }
 
 const removeFocus = () => {
     txtPlaceholder.value = originalPlaceholder.value;
     msgSuccess.value = null;
     msgError.value = null;
+    isActiveModal.value = false;
 }
 
 const getText = ($event) => {
@@ -35,6 +38,7 @@ const getText = ($event) => {
         txtPlaceholder.value = originalPlaceholder.value;
         msgSuccess.value = null;
         msgError.value = null;
+        isActiveModal.value = false;
     }
 }
 
@@ -66,9 +70,12 @@ const handleSubmitForm = async (text) => {
                 msgError.value = null;
                 agradecimientoTextarea.value = '';
                 txtPlaceholder.value = originalPlaceholder.value;
-                const { agradecimientos, foundsAllsQty } = useAgradecimientos();
+                const { agradecimientos, foundsAllsQty, currentPageQty } = useAgradecimientos(store);
+
                 store.commit('main/setAgradecimientos', agradecimientos);
-                store.commit('main/setAcknowledgmentsQty', foundsAllsQty);
+                store.commit('main/setAllFoundsAcknowledgmentsQty', foundsAllsQty);
+                store.commit('main/setCurrentPageAcknowledgmentsQty', currentPageQty);
+                isActiveModal.value = true;
             } else {
                 msgSuccess.value = null;
                 msgError.value = response.msg;
@@ -101,12 +108,13 @@ const handleSubmitForm = async (text) => {
                 <p class="msgError" v-if="msgError">{{ msgError }}</p>
 
                 <div class="container-button">
-                    <v-btn block class="transparent-btn" @click="handleSubmitForm(agradecimientoTextarea)">enviar</v-btn>
+                    <v-btn block class="transparent-btn" :disabled="agradecimientoTextarea.length <= 10"
+                        @click="handleSubmitForm(agradecimientoTextarea)">enviar</v-btn>
                 </div>
             </form>
         </div>
 
-        <div v-if="msgSuccess">
+        <div v-if="isActiveModal">
             {{ showAlert() }}
         </div>
 
