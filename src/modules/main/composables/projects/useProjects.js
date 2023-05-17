@@ -29,7 +29,6 @@ const useProjects = (store) => {
       // currentPage.value = page;
       isLoadingProjects.value = false;
 
-      console.log('data.projects ->', data.projects);
       store.commit('main/setProjects', data.projects);
       store.commit('main/setAllFoundsProjectsQty', data.foundsAllsQty);
       store.commit('main/setCurrentNumberPageProjects', page);

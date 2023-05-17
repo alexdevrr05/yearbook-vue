@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import isAutheticatedGuard from './auth-guad';
 import HomeLayout from '@/modules/main/layouts/HomeLayout';
 import LoginPage from '@/modules/shared/pages/LoginPage';
+import Alumnos from '@/modules/shared/pages/Alumnos.vue';
 
 const routes = [
   {
@@ -14,7 +15,13 @@ const routes = [
     name: 'home',
     beforeEnter: [isAutheticatedGuard],
     component: HomeLayout,
-    children: [],
+    children: [
+      {
+        path: '/alumnos',
+        name: 'alumnos',
+        component: Alumnos,
+      },
+    ],
   },
   {
     path: '/login',

@@ -9,7 +9,10 @@
         <router-link v-if="isLoggedIn" to="home" v-slot="{ isActive }">
           <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Home" }}</a>
         </router-link>
-        <router-link v-if="!isLoggedIn" to="login" v-slot="{ isActive }">
+        <router-link v-if="isAdminSession" to="alumnos" v-slot="{ isActive }">
+          <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Alumnos" }}</a>
+        </router-link>
+        <router-link v-if="!isLoggedIn && !isAdminSession" to="login" v-slot="{ isActive }">
           <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Login" }}</a>
         </router-link>
         <router-link v-else to="">
@@ -43,12 +46,14 @@ export default defineComponent({
     const isLoggedIn = computed(() => store.state.main.userSession?.token);
     const { logout } = useAuth();
     const nameUserSession = computed(() => store.state.main.userSession?.nombre);
+    const isAdminSession = computed(() => store.state.main.userSession?.rol === "ADMIN_ROLE");
 
     return {
       // localStorageData,
       isLoggedIn,
       logout,
       nameUserSession,
+      isAdminSession,
     }
   },
 });
