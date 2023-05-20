@@ -4,6 +4,7 @@ import isAutheticatedGuard from './auth-guad';
 import HomeLayout from '@/modules/main/layouts/HomeLayout';
 import LoginPage from '@/modules/shared/pages/LoginPage';
 import Alumnos from '@/modules/shared/pages/Alumnos.vue';
+import Profile from '@/modules/shared/pages/Profile.vue';
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginPage,
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile,
   },
   {
     path: '/register',

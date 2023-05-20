@@ -1,5 +1,5 @@
 export const getUsers = (state) => state.users;
-export const getUserSession = (state) => state.userSession.nombre;
+export const getUserSession = (state) => state.userSession;
 export const getAcknowledgmentsQty = (state) => state.acknowledgmentsQty;
 export const getAgradecimientos = (state) => state.agradecimientos;
 export const getAllFoundsAcknowledgmentsQty = (state) =>

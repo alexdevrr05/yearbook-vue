@@ -2,19 +2,27 @@
   <div id="navbar">
     <div class="navbar-container d-flex w-100 align-center">
       <div class="navbar-logo flex-1">
-        <h3 v-if="nameUserSession">{{ nameUserSession }}<span style="color: #FA983F;">.</span></h3>
+
+        <router-link v-if="isLoggedIn" to="profile" v-slot="{ isActive }">
+          <a v-if="nameUserSession" :class="isActive ? 'is-active' : 'normal-link'">{{ nameUserSession }}<span
+              style="color: #FA983F;">.</span></a>
+        </router-link>
       </div>
       <!-- logo and routes -->
+
       <div class="flex-3">
         <router-link v-if="isLoggedIn" to="home" v-slot="{ isActive }">
           <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Home" }}</a>
         </router-link>
+
         <router-link v-if="isAdminSession" to="alumnos" v-slot="{ isActive }">
           <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Alumnos" }}</a>
         </router-link>
+
         <router-link v-if="!isLoggedIn && !isAdminSession" to="login" v-slot="{ isActive }">
           <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Login" }}</a>
         </router-link>
+
         <router-link v-else to="">
           <a class="normal-link" @click="logout">{{ "Logout" }}</a>
         </router-link>
