@@ -72,3 +72,15 @@ export const logoutUser = ({ commit }) => {
     console.log('error ->', error);
   }
 };
+
+export const updateImageUser = async ({ commit }, payload) => {
+  try {
+    const formData = new FormData();
+    formData.append('imagen', payload.file.value);
+
+    const data = await apiDB.put(`/usuarios/${payload.idUser}`, formData);
+    console.log({ data });
+  } catch (error) {
+    console.log(error);
+  }
+};

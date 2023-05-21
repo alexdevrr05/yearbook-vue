@@ -29,7 +29,7 @@ watch(
 
 <template>
     <div class="container">
-        <h2 class="title text-white text-center">Profile Picture</h2>
+        <h2 class="title text-white text-center">Editar perfil</h2>
         <upload-image />
     </div>
 </template>

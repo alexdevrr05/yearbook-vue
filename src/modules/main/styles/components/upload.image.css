@@ -1,3 +1,8 @@
+.profile-img {
+  display: flex;
+  flex-direction: column;
+}
+
 .container-form-image {
     display: flex;
     justify-content: center;

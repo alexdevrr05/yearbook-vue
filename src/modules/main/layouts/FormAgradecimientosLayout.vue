@@ -61,10 +61,12 @@ const handleSubmitForm = async (text) => {
     }
 
     if (text.length > 10) {
-        const userName = currentUserSession.value;
+        const userName = currentUserSession.value.nombre;
+        const userImage = currentUserSession.value.image;
+        const userEmail = currentUserSession.value.email;
 
         try {
-            const response = await postAgradecimientos(userName, text);
+            const response = await postAgradecimientos(userName, text, userImage, userEmail);
             if (response.status === 200) {
                 msgSuccess.value = response.msg;
                 msgError.value = null;

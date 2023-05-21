@@ -1,10 +1,12 @@
 import apiDB from '@/api/apiDB';
 
-export const postAgradecimientos = async (nombre, text) => {
+export const postAgradecimientos = async (nombre, text, userImage, email) => {
   try {
     const { data } = await apiDB.post('/agradecimientos', {
       nombre,
       agradecimientos: text,
+      userImage,
+      email,
     });
 
     return {

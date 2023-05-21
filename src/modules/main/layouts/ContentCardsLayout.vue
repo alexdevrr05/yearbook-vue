@@ -13,7 +13,7 @@
             <div class="container-cards">
                 <customized-card v-for="agradecimiento of agradecimientosState" :key="agradecimiento._id"
                     :userName="agradecimiento.userName" :agradecimiento="agradecimiento.agradecimientos"
-                    :color="agradecimiento.color" />
+                    :color="agradecimiento.color" :image="agradecimiento.userImage" />
             </div>
 
             <div class="container-pagination">

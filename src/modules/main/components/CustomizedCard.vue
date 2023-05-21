@@ -2,8 +2,9 @@
 <template>
     <div class="card" :style="{ backgroundColor: color }">
         <div class="card-content" ref="card">
-            <v-avatar color="grey-darken-3"
-                image="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80">
+            <v-avatar v-if="isExternalUrl(image)" color="grey-darken-3" :image="isExternalUrl(image) && image">
+            </v-avatar>
+            <v-avatar v-else color="grey-darken-3" :image="'http://localhost:4000/' + image">
             </v-avatar>
             <div class="title-username">
                 <h2>{{ userName }}</h2>
@@ -36,7 +37,10 @@ export default {
         },
         agradecimiento: {
             type: String,
-        }
+        },
+        image: {
+            type: String,
+        },
     },
 
     setup(props) {
@@ -44,6 +48,8 @@ export default {
         const acknowledgments = ref();
         const { agradecimiento } = toRefs(props);
 
+
+        const isExternalUrl = (url) => url?.startsWith('https');
 
         onMounted(() => {
             if (card.value.offsetWidth > 400) {
@@ -55,7 +61,8 @@ export default {
 
         return {
             acknowledgments,
-            card
+            card,
+            isExternalUrl
         }
     },
 }
