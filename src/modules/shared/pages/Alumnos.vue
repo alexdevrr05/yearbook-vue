@@ -2,10 +2,11 @@
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 const store = useStore();
+
 const currentUsers = ref(computed(() => store.getters[['main/getUsers']]));
 const isExternalUrl = (url) => url?.startsWith('https');
 const deleteUser = (id) => {
-    console.log("id ->", id);
+    store.dispatch("main/deleteUser", id)
 }
 
 </script>
@@ -15,8 +16,8 @@ const deleteUser = (id) => {
         <div class="alumnos-container">
             <!-- <h1>Alumnos page</h1> -->
             <div class="card-container" v-for="user of currentUsers">
-                <div class="card">
-                    <div class="content-container" v-if="user.rol !== 'ADMIN_ROLE'">
+                <div class="card" v-if="user.rol !== 'ADMIN_ROLE'">
+                    <div class="content-container">
                         <div class="image-container">
                             <!-- <img :src="isExternalUrl(user.image)" alt=""> -->
                             <img v-if="isExternalUrl(user?.image)" :src="user.image" :alt="user?.nombre + '-img'">
