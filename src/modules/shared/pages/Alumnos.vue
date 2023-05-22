@@ -3,6 +3,10 @@ import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 const store = useStore();
 const currentUsers = ref(computed(() => store.getters[['main/getUsers']]));
+const isExternalUrl = (url) => url?.startsWith('https');
+const deleteUser = (id) => {
+    console.log("id ->", id);
+}
 
 </script>
 
@@ -10,13 +14,18 @@ const currentUsers = ref(computed(() => store.getters[['main/getUsers']]));
     <div class="section">
         <div class="alumnos-container">
             <!-- <h1>Alumnos page</h1> -->
-            <div class="card-container">
-                <div class="card" v-for="user of currentUsers">
-                    <div class="content-container">
+            <div class="card-container" v-for="user of currentUsers">
+                <div class="card">
+                    <div class="content-container" v-if="user.rol !== 'ADMIN_ROLE'">
                         <div class="image-container">
-                            <img :src="user.image" alt="">
+                            <!-- <img :src="isExternalUrl(user.image)" alt=""> -->
+                            <img v-if="isExternalUrl(user?.image)" :src="user.image" :alt="user?.nombre + '-img'">
+                            <img v-else :src="'http://localhost:4000/' + user.image" :alt="user?.nombre + '-img'">
                         </div>
                         <p class="name-alumno">{{ user.nombre }}</p>
+                    </div>
+                    <div class="btn-delete">
+                        <button class="delete-button" @click="deleteUser(user.uid)">&times;</button>
                     </div>
                 </div>
             </div>
@@ -54,8 +63,8 @@ const currentUsers = ref(computed(() => store.getters[['main/getUsers']]));
 
 .content-container {
     display: flex;
-    padding: 1rem;
-    gap: 1rem;
+    padding: 0.5rem;
+    gap: 0.1rem;
     align-items: center;
 }
 
@@ -66,12 +75,31 @@ const currentUsers = ref(computed(() => store.getters[['main/getUsers']]));
 }
 
 .card {
+    width: 100px;
     background: linear-gradient(90deg, rgba(251, 103, 90, 1) 0%, rgba(249, 104, 36, 1) 35%, rgba(250, 152, 63, 1) 100%);
-
-
-
-    width: 200px;
     border-radius: 10px;
+    position: relative;
+}
+
+.name-alumno {
+    font-weight: bold;
+    font-size: 10px;
+}
+
+
+@media (min-width: 768px) {
+    .card {
+        width: 200px;
+    }
+
+    .content-container {
+        padding: 1rem;
+        gap: 1rem
+    }
+
+    .name-alumno {
+        font-size: unset;
+    }
 }
 
 
@@ -79,6 +107,7 @@ const currentUsers = ref(computed(() => store.getters[['main/getUsers']]));
     border-radius: 10px;
     width: 30px;
     height: 30px;
+    display: flex;
 }
 
 .image-container img {
@@ -87,8 +116,24 @@ const currentUsers = ref(computed(() => store.getters[['main/getUsers']]));
     border-radius: 5px;
 }
 
-.name-alumno {
-    font-weight: bold;
+
+.btn-delete {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.delete-button {
+    position: absolute;
+    top: -1rem;
+    right: -1.5rem;
+    background-color: rgb(194, 47, 59);
+    color: white;
+    border: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    cursor: pointer;
 }
 </style>
 
