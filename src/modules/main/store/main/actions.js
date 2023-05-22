@@ -87,12 +87,14 @@ export const updateImageUser = async ({ commit }, payload) => {
 
 export const deleteUser = async ({ commit }, userId) => {
   try {
-    const data = await apiDB.delete(`/usuarios/${userId}`, {
+    const { data } = await apiDB.delete(`/usuarios/${userId}`, {
       headers: {
         'x-token': `${localStorage.getItem('token')}`,
       },
     });
-    console.log(data);
+
+    const user = data.usuario;
+    commit('setUserDeleted', user.nombre);
   } catch (error) {
     console.log(error);
   }

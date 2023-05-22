@@ -54,3 +54,7 @@ export const setAllFoundsProjectsQty = (state, foundsProjectsQty) => {
 export const setCurrentPageProjectsQty = (state, currentProjectsQty) => {
   state.currentProjectsQty = currentProjectsQty;
 };
+
+export const setUserDeleted = (state, currentUserDeleted) => {
+  state.currentUserDeleted = currentUserDeleted;
+}

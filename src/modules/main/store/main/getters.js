@@ -14,3 +14,5 @@ export const getCurrentNumberPageProjects = (state) =>
 export const getAllFoundsProjectsQty = (state) => state.projectsQty;
 
 export const getCurrentPageProjectsQty = (state) => state.currentProjectsQty;
+
+export const getUserDeleted = (state) => state.currentUserDeleted;

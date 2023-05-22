@@ -1,20 +1,50 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch, createApp } from 'vue';
 import { useStore } from 'vuex';
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 const store = useStore();
 
+const app = createApp({});
 const currentUsers = ref(computed(() => store.getters[['main/getUsers']]));
+const currentUserDeleted = ref(computed(() => store.getters[['main/getUserDeleted']]));
 const isExternalUrl = (url) => url?.startsWith('https');
+const isActiveModal = ref(false);
+
 const deleteUser = (id) => {
     store.dispatch("main/deleteUser", id)
 }
+
+watch(currentUserDeleted, (newValue, oldValue) => {
+    if (oldValue !== newValue) {
+        store.dispatch("main/loadUsers")
+        isActiveModal.value = true;
+        return;
+    }
+
+    isActiveModal.value = false;
+});
+
+app.use(VueSweetalert2);
+
+const showAlert = () => {
+    app.config.globalProperties.$swal({
+        title: 'Elimnado',
+        text: `Usuario ${currentUserDeleted.value} eliminado`,
+        icon: 'success',
+    });
+};
+
 
 </script>
 
 <template>
     <div class="section">
         <div class="alumnos-container">
-            <!-- <h1>Alumnos page</h1> -->
+            <div v-if="isActiveModal">
+                {{ showAlert() }}
+            </div>
             <div class="card-container" v-for="user of currentUsers">
                 <div class="card" v-if="user.rol !== 'ADMIN_ROLE'">
                     <div class="content-container">
@@ -59,6 +89,8 @@ const deleteUser = (id) => {
 
 .alumnos-container {
     padding: 0 1rem;
+    display: flex;
+    gap: 2rem;
     padding-top: 1rem;
 }
 

@@ -15,4 +15,5 @@ export default () => ({
   currentNumberPageProjects: 1,
   projectsQty: 0,
   currentProjectsQty: 0,
+  currentUserDeleted: null,
 });
