@@ -23,6 +23,10 @@
           <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Login" }}</a>
         </router-link>
 
+        <router-link v-if="!isLoggedIn && !isAdminSession" to="register" v-slot="{ isActive }">
+          <a :class="isActive ? 'is-active' : 'normal-link'">{{ "Register" }}</a>
+        </router-link>
+
         <router-link v-else to="">
           <a class="normal-link" @click="logout">{{ "Logout" }}</a>
         </router-link>
