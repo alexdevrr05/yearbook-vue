@@ -126,14 +126,23 @@ const deleteUser = (id) => {
 .delete-button {
     position: absolute;
     top: -1rem;
-    right: -1.5rem;
+    right: -1rem;
     background-color: rgb(194, 47, 59);
     color: white;
     border: none;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     border-radius: 20px;
     cursor: pointer;
+}
+
+
+@media (min-width: 768px) {
+    .delete-button {
+        height: 30px;
+        width: 30px;
+        right: -1.5rem;
+    }
 }
 </style>
 
