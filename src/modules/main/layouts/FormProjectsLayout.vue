@@ -64,7 +64,7 @@ const isValidForm = computed(() => projectTitleInput.value.length <= 10 || proje
 const handleSubmitForm = async () => {
     const formData = new FormData()
 
-    const userName = currentUserSession.value;
+    const userName = currentUserSession.value.nombre;
 
     formData.append('title', projectTitleInput.value);
     formData.append('description', projectDescInput.value);
