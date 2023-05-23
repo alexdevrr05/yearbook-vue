@@ -4,7 +4,7 @@
         <div class="card-login-container">
             <div class="header">
                 <div class="logo-container">
-                    <span class="logo text-header">alex</span><span class="text-header text-orange">.</span>
+                    <span class="logo text-header">alexdev</span><span class="text-header text-orange">.</span>
                 </div>
                 <div class="sign-or-login-container">
                     <span>No account?</span>
@@ -25,6 +25,7 @@
                 <!-- TODO: form login -->
                 <div class="form-container">
                     <form v-if="isLoginOption" method="post" @submit.prevent="onSubmitLogin">
+                        <!-- @submit.prevent="onSubmitLogin" -->
                         <label>email address</label>
                         <input class="input" id="email" :error="!isEmailValid && 'Invalid email address'" type="email"
                             name="email" placeholder="vue@gmail.com" v-model="loginEmail">
@@ -35,8 +36,9 @@
                         <input class="input" type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                             v-model="loginPassword">
 
-                        <v-btn @click="onSubmitLogin" :disabled="!loginIsFormValid" color="black" rounded="lg"
-                            class="btn-sign-in" size="large">Send</v-btn>
+                        <!-- @click="onSubmitLogin" -->
+                        <v-btn type="submit" :disabled="!loginIsFormValid" color="black" rounded="lg" class="btn-sign-in"
+                            size="large">Send</v-btn>
                     </form>
 
                     <!-- TODO: form sign in -->
