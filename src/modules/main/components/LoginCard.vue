@@ -56,9 +56,8 @@
                         <input class="input" type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
                             v-model="password">
 
-
-                        <v-btn @click="onSubmitRegister" :disabled="!isFormValid" color="black" rounded="lg"
-                            class="btn-sign-in" size="large">Sign
+                        <v-btn :disabled="!isFormValid" type="submit" color="black" rounded="lg" class="btn-sign-in"
+                            size="large">Sign
                             in</v-btn>
                     </form>
 
