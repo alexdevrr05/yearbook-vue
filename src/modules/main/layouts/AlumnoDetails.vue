@@ -17,7 +17,13 @@ onMounted(() => {
     }
 });
 
-const { isLoading, alumno, searchAlumno } = useAlumno(store, route.params.id);
+const { isLoading, searchAlumno } = useAlumno(store, route.params.id);
+
+const nombreAlumno = ref(computed(() => useDetails.value.nombre));
+
+const updateUser = (id) => {
+    store.dispatch("main/updateUserDetails", { id, nombre: nombreAlumno.value })
+}
 
 watch(
     // el parametro que queremos escuchar
@@ -43,26 +49,30 @@ const getText = ($event) => {
 </script>
 
 <template>
-    <div class="section">
+    <div class="section-edit">
 
         <div v-if="isLoading">
             <h1>Loading...</h1>
         </div>
 
-        <div v-else class="container">
-            <h1>Actualiza la información de {{ alumno?.usuario.nombre }}</h1>
+        <div v-else class="container-edit">
+            <!-- {{ useDetails }} -->
+            <h1>Actualiza la información de {{ useDetails.nombre }}</h1>
             <div>
-                <form action="post" class="form-container">
+                <form action="post" class="form-container" @submit.prevent="updateUser(useDetails.uid)">
                     <input v-model="useDetails.nombre" class="ui-textarea" />
-                    <input v-model="useDetails.email" class="ui-textarea" />
-                    <!-- <p class="msgError" v-if="msgError">{{ msgError }}</p> -->
+                    <!-- <input v-model="useDetails.uid" class="ui-textarea" /> -->
 
                     <div class="container-button">
-                        <v-btn block class="transparent-btn"
-                            @click="handleSubmitForm(agradecimientoTextarea)">enviar</v-btn>
+                        <v-btn block class="transparent-btn" type="submit"
+                            @click="updateUser(useDetails.uid)">enviar</v-btn>
                     </div>
                 </form>
 
+
+                <pre>
+
+                </pre>
             </div>
 
         </div>
@@ -70,14 +80,14 @@ const getText = ($event) => {
 </template>
 
 <style scoped>
-.section {
+.section-edit {
     color: white;
     margin-top: 3rem;
     text-align: center;
 }
 
 
-.container {
+.container-edit {
     display: flex;
     flex-direction: column;
     align-items: center;

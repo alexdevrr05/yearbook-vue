@@ -110,3 +110,16 @@ export const loadUserDetailsById = async ({ commit }, userId) => {
     console.log(error);
   }
 };
+
+export const updateUserDetails = async ({ commit }, payload) => {
+  try {
+    const { data } = await apiDB.put(`/usuarios/${payload.id}`, {
+      nombre: payload.nombre,
+    });
+
+    console.log('data ->', data);
+    // commit('setUserDetails', user);
+  } catch (error) {
+    console.log(error);
+  }
+};
