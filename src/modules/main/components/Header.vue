@@ -36,6 +36,6 @@
 
 </script>
 
-<style src="../styles/styles.main.css"></style>
+<style src="../styles/styles.main.css" scoped></style>
 
 

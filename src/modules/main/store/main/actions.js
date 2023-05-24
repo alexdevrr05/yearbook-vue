@@ -99,3 +99,14 @@ export const deleteUser = async ({ commit }, userId) => {
     console.log(error);
   }
 };
+
+export const loadUserDetailsById = async ({ commit }, userId) => {
+  try {
+    const { data } = await apiDB.get(`/usuario/${userId}`);
+
+    const user = data.usuario;
+    commit('setUserDetails', user);
+  } catch (error) {
+    console.log(error);
+  }
+};

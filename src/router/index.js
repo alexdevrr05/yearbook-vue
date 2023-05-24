@@ -5,6 +5,7 @@ import HomeLayout from '@/modules/main/layouts/HomeLayout';
 import LoginPage from '@/modules/shared/pages/LoginPage';
 import Alumnos from '@/modules/shared/pages/Alumnos.vue';
 import Profile from '@/modules/shared/pages/Profile.vue';
+import AlumnoDetails from '@/modules/main/layouts/AlumnoDetails.vue';
 
 const routes = [
   {
@@ -41,6 +42,19 @@ const routes = [
       import(
         /* webpackChunkName: "LoginPage" */
         '@/modules/shared/pages/LoginPage'
+      ),
+  },
+  {
+    path: '/alumno/:id',
+    name: 'alumno-details',
+    component: AlumnoDetails,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () =>
+      import(
+        /* webpackChunkName: "NoPageFound" */
+        '@/modules/shared/pages/NoPageFound'
       ),
   },
 ];

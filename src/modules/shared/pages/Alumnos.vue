@@ -3,6 +3,7 @@ import { ref, computed, watch, createApp } from 'vue';
 import { useStore } from 'vuex';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import router from '@/router';
 
 const store = useStore();
 
@@ -11,6 +12,8 @@ const currentUsers = ref(computed(() => store.getters[['main/getUsers']]));
 const currentUserDeleted = ref(computed(() => store.getters[['main/getUserDeleted']]));
 const isExternalUrl = (url) => url?.startsWith('https');
 const isActiveModal = ref(false);
+
+const handleClickInCard = (id) => router.push({ name: 'alumno-details', params: { id } })
 
 const deleteUser = (id) => {
     store.dispatch("main/deleteUser", id)
@@ -46,7 +49,7 @@ const showAlert = () => {
                 {{ showAlert() }}
             </div>
             <div class="card-container" v-for="user of currentUsers">
-                <div class="card" v-if="user.rol !== 'ADMIN_ROLE'">
+                <div class="card" v-if="user.rol !== 'ADMIN_ROLE'" @click="handleClickInCard(user.uid)">
                     <div class="content-container">
                         <div class="image-container">
                             <!-- <img :src="isExternalUrl(user.image)" alt=""> -->
@@ -112,6 +115,7 @@ const showAlert = () => {
     background: linear-gradient(90deg, rgba(251, 103, 90, 1) 0%, rgba(249, 104, 36, 1) 35%, rgba(250, 152, 63, 1) 100%);
     border-radius: 10px;
     position: relative;
+    cursor: pointer;
 }
 
 .name-alumno {
