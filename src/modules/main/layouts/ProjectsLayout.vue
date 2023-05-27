@@ -51,7 +51,8 @@ const props = defineProps({
             <div v-else class="cards-container">
                 <div class="card" v-for="project in projectsState" :key="project._id">
                     <div class="card-img-container">
-                        <img :src="'http://localhost:4000/' + project.image" :alt="project.title + 'img'">
+                        <img :src="'https://rest-node-mongo-prod.up.railway.app/' + project.image"
+                            :alt="project.title + 'img'">
                     </div>
                     <div class="container-desc">
                         <h4 class="title-card">{{ titleLengthController(project.title) }}</h4>

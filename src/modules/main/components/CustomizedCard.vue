@@ -4,7 +4,7 @@
         <div class="card-content" ref="card">
             <v-avatar v-if="isExternalUrl(image)" color="grey-darken-3" :image="isExternalUrl(image) && image">
             </v-avatar>
-            <v-avatar v-else color="grey-darken-3" :image="'http://localhost:4000/' + image">
+            <v-avatar v-else color="grey-darken-3" :image="'https://rest-node-mongo-prod.up.railway.app/' + image">
             </v-avatar>
             <div class="title-username">
                 <h2>{{ userName }}</h2>

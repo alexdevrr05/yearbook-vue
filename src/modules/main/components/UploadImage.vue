@@ -41,7 +41,7 @@ const isExternalUrl = (url) => url?.startsWith('https');
         <div v-else class="container-form-image">
             <div class="imagen-container">
                 <img v-if="isExternalUrl(user?.image)" :src="user.image" :alt="user?.nombre + '-img'">
-                <img v-else :src="'http://localhost:4000/' + user.image" :alt="user?.nombre + '-img'">
+                <img v-else :src="'https://rest-node-mongo-prod.up.railway.app/' + user.image" :alt="user?.nombre + '-img'">
                 <!-- <input type="file" ref="fileInputRef" @change="handleFileChange"> -->
                 <div class="file-input">
                     <input type="file" ref="fileInput" @change="handleFileInputChange" class="file">

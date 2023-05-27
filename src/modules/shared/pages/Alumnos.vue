@@ -54,7 +54,8 @@ const showAlert = () => {
                         <div class="image-container">
                             <!-- <img :src="isExternalUrl(user.image)" alt=""> -->
                             <img v-if="isExternalUrl(user?.image)" :src="user.image" :alt="user?.nombre + '-img'">
-                            <img v-else :src="'http://localhost:4000/' + user.image" :alt="user?.nombre + '-img'">
+                            <img v-else :src="'https://rest-node-mongo-prod.up.railway.app/' + user.image"
+                                :alt="user?.nombre + '-img'">
                         </div>
                         <p class="name-alumno">{{ user.nombre }}</p>
                     </div>
