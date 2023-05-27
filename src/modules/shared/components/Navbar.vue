@@ -33,7 +33,10 @@
       </div>
       <!-- search and login -->
       <div class="d-flex text-white gap-1 align-center">
-        <input type="search" placeholder="Search" class="search">
+        <!-- <input type="number" placeholder="Search" class="search" v-model="pokemonId"> -->
+        <form @submit.prevent="onSubmit">
+          <input type="search" placeholder="Search" class="search" v-model="textRef" />
+        </form>
         <div class="example"></div>
         <v-btn v-if="!isLoggedIn" block rounded="xl" size="small" class="button min-w-u p-1"
           color="deep-purple">Login</v-btn>
@@ -43,11 +46,12 @@
 </template>
 
 <script>
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 
-
 import useAuth from '@/modules/main/composables/useAuth';
+import router from '@/router';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   components: {},
@@ -55,10 +59,29 @@ export default defineComponent({
   setup() {
     const store = useStore();
 
+    const route = useRoute();
     const isLoggedIn = computed(() => store.state.main.userSession?.token);
     const { logout } = useAuth();
     const nameUserSession = computed(() => store.state.main.userSession?.nombre);
     const isAdminSession = computed(() => store.state.main.userSession?.rol === "ADMIN_ROLE");
+
+
+    // const onSubmit = (id) => {
+    //   if (id) {
+    //     router.push({ name: 'alumno-details', params: { id } })
+    //   } else {
+    //     router.push({ name: 'home' })
+    //   }
+    // }
+
+    // watch(
+    //   // el parametro que queremos escuchar
+    //   () => route.params.id,
+    //   // la función a ejecutar al cambiar el parametro
+    //   () => onSubmit(route.params.id),
+    // )
+
+    const textRef = ref();
 
     return {
       // localStorageData,
@@ -66,7 +89,10 @@ export default defineComponent({
       logout,
       nameUserSession,
       isAdminSession,
+      textRef,
+      onSubmit: () => router.push({ name: 'alumno-details', params: { id: textRef.value ? textRef.value : '645579857071cb293c9be13d' } })
     }
+    // (id) => router.push({ name: 'alumno-details', params: { id } })
   },
 });
 </script>

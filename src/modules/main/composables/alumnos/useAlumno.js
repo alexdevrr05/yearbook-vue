@@ -13,11 +13,15 @@ const useAlumno = (store, userId = '1') => {
       isLoading.value = true;
       const { data } = await apiDB.get(`/usuarios/userDetails/${id}`);
       alumno.value = data;
+      errorMsg.value = null;
 
-      store.commit('main/setUserDetails', data.usuario);
+      if (data.usuario) {
+        store.commit('main/setUserDetails', data.usuario);
+      }
+      isLoading.value = false;
     } catch (error) {
       console.log('error');
-      errorMsg.value = 'No se pudo encontrar ese usuario';
+      errorMsg.value = 'No se pudo encontrar al usuario';
     }
 
     isLoading.value = false;

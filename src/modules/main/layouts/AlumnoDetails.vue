@@ -17,12 +17,18 @@ onMounted(() => {
     }
 });
 
-const { isLoading, searchAlumno } = useAlumno(store, route.params.id);
+const { isLoading, searchAlumno, errorMsg } = useAlumno(store, route.params.id);
 
-const nombreAlumno = ref(computed(() => useDetails.value.nombre));
+let nombreAlumno = ref('none');;
+
+if (useDetails.value) {
+    nombreAlumno = ref(computed(() => useDetails.value.nombre));
+}
 
 const updateUser = (id) => {
-    store.dispatch("main/updateUserDetails", { id, nombre: nombreAlumno.value })
+    if (nombreAlumno) {
+        store.dispatch("main/updateUserDetails", { id, nombre: nombreAlumno.value })
+    }
 }
 
 watch(
@@ -41,39 +47,35 @@ watch(
     }
 )
 
-const getText = ($event) => {
-    if ($event.code === "Escape") {
-    }
-}
-
 </script>
 
 <template>
     <div class="section-edit">
+        <div v-if="errorMsg || !useDetails">
+            <h1>
+                {{ errorMsg || 'No se pudo encontrar ese usuario' }}
+            </h1>
+        </div>
 
         <div v-if="isLoading">
             <h1>Loading...</h1>
         </div>
 
         <div v-else class="container-edit">
-            <!-- {{ useDetails }} -->
-            <h1>Actualiza la información de {{ useDetails.nombre }}</h1>
-            <div>
-                <form action="post" class="form-container" @submit.prevent="updateUser(useDetails.uid)">
-                    <input v-model="useDetails.nombre" class="ui-textarea" />
-                    <!-- <input v-model="useDetails.uid" class="ui-textarea" /> -->
+            <template v-if="!errorMsg && useDetails">
+                <h1>Actualiza la información de {{ useDetails.nombre }}</h1>
+                <div>
+                    <form action="post" class="form-container" @submit.prevent="updateUser(useDetails.uid)">
+                        <input v-model="useDetails.nombre" class="ui-textarea" />
+                        <!-- <input v-model="useDetails.uid" class="ui-textarea" /> -->
 
-                    <div class="container-button">
-                        <v-btn block class="transparent-btn" type="submit"
-                            @click="updateUser(useDetails.uid)">enviar</v-btn>
-                    </div>
-                </form>
-
-
-                <pre>
-
-                </pre>
-            </div>
+                        <div class="container-button">
+                            <v-btn block class="transparent-btn" type="submit"
+                                @click="updateUser(useDetails.uid)">enviar</v-btn>
+                        </div>
+                    </form>
+                </div>
+            </template>
 
         </div>
     </div>

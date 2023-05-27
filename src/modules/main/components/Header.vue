@@ -2,11 +2,10 @@
     <div class="header__grid">
         <div class="header__text">
             <div class="ad-container">
-                <p><span class="new-text text-green-accent-3">New</span> Get access to Top Pre-vetted Software
-                    Engineers.</p>
+                <p><span class="new-text text-green-accent-3">New</span> Lorem ipsum dolor sit amet consectetur.</p>
             </div>
 
-            <h1 class="header__heading">Hire. The world's best talent</h1>
+            <h1 class="header__heading">Anuario estudiantil</h1>
             <h3 class="header__description">Take the friction out of hiring and choose from the world's best software
                 engineers. Rigorous technical and
                 behavioral vetting ensures only the top talent is presented to you.</h3>
