@@ -1,3 +1,4 @@
+import router from '@/router';
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 
@@ -18,13 +19,17 @@ const useRegisterForm = () => {
     () => isEmailValid.value && name.value && password.value
   );
 
-  const register = () => {
-    store.dispatch('main/registerUser', {
+  const register = async () => {
+    const response = await store.dispatch('main/registerUser', {
       email: email.value,
       password: password.value,
       nombre: name.value,
       rol: role.value,
     });
+
+    if (response.usuario) {
+      router.push({ name: 'login' });
+    }
   };
 
   return {

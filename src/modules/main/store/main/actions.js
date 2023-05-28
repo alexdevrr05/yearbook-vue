@@ -43,6 +43,7 @@ export const registerUser = async ({ commit }, bodyReq) => {
   try {
     // data is equal to = { email, nombre, password, rol }
     const { data } = await apiDB.post('/usuarios', bodyReq);
+    return data;
   } catch (error) {
     const errorsList = error.response.data.errors;
     console.log('errorsList ->', errorsList);
