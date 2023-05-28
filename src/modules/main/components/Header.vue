@@ -10,8 +10,7 @@
                 engineers. Rigorous technical and
                 behavioral vetting ensures only the top talent is presented to you.</h3>
             <div class="header__button">
-                <a href="https://drive.google.com/u/0/uc?id=160ay_Y-orFAA5cQEwodDRuPTIBm12rS6&export=download"
-                    target="_blank">
+                <a href="https://drive.google.com/uc?export=download&id=1yMjG39H7b-YcJIiP9IBB1ilGMC4WMzPL" target="_blank">
                     <v-btn block rounded="xl" size="x-large" class="button" color="deep-purple">Find Talent</v-btn>
                 </a>
                 <v-btn block rounded="xl" size="x-large" class="button right-button">Play Video</v-btn>
