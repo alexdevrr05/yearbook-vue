@@ -1,15 +1,26 @@
 <script setup>
-import { watch, onMounted, computed, ref } from 'vue';
+import { watch, onMounted, computed, ref, createApp } from 'vue';
 import { useStore } from 'vuex';
 import { useRoute, useRouter } from 'vue-router';
 
 import useAlumno from '../composables/alumnos/useAlumno';
+
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+const app = createApp({});
 
 const store = useStore();
 const router = useRouter();
 const route = useRoute();
 
 const useDetails = ref(computed(() => store.getters[['main/getUserDetails']]));;
+const isCorrectIcon = ref();
+const isActiveModal = ref(false);
+const titleAlert = ref('Usuario actualizado!');
+
+let nombreAlumno = ref('none');
+const msgSuccess = ref('Actualización exitosa');
 
 onMounted(() => {
     if (store.state.main.userSession) {
@@ -19,17 +30,39 @@ onMounted(() => {
 
 const { isLoading, searchAlumno, errorMsg } = useAlumno(store, route.params.id);
 
-let nombreAlumno = ref('none');;
 
 if (useDetails.value) {
     nombreAlumno = ref(computed(() => useDetails.value.nombre));
 }
 
-const updateUser = (id) => {
+const updateUser = async (id) => {
+    isCorrectIcon.value = '';
     if (nombreAlumno) {
-        store.dispatch("main/updateUserDetails", { id, nombre: nombreAlumno.value })
+        const response = await store.dispatch("main/updateUserDetails", { id, nombre: nombreAlumno.value })
+        if (response.error) {
+            titleAlert.value = 'Error',
+                msgSuccess.value = 'Algo ha salido mal';
+            isCorrectIcon.value = 'error';
+            isActiveModal.value = true;
+            return;
+        }
+
+        isActiveModal.value = true;
+        isCorrectIcon.value = 'success';
     }
 }
+
+app.use(VueSweetalert2);
+
+const showAlert = () => {
+    app.config.globalProperties.$swal({
+        title: titleAlert.value,
+        text: msgSuccess.value,
+        icon: isCorrectIcon.value,
+    }).then(() => {
+        isActiveModal.value = false;
+    });
+};
 
 watch(
     // el parametro que queremos escuchar
@@ -76,7 +109,9 @@ watch(
                     </form>
                 </div>
             </template>
-
+            <div v-if="isActiveModal">
+                {{ showAlert() }}
+            </div>
         </div>
     </div>
 </template>

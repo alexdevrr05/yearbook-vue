@@ -117,9 +117,9 @@ export const updateUserDetails = async ({ commit }, payload) => {
       nombre: payload.nombre,
     });
 
-    console.log('data ->', data);
-    // commit('setUserDetails', user);
+    return data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    return error;
   }
 };
