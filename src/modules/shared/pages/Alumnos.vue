@@ -49,8 +49,8 @@ const showAlert = () => {
                 {{ showAlert() }}
             </div>
             <div class="card-container" v-for="user of currentUsers">
-                <div class="card" v-if="user.rol !== 'ADMIN_ROLE'" @click="handleClickInCard(user.uid)">
-                    <div class="content-container">
+                <div class="card" v-if="user.rol !== 'ADMIN_ROLE'">
+                    <div class="content-container" @click="handleClickInCard(user.uid)">
                         <div class="image-container">
                             <!-- <img :src="isExternalUrl(user.image)" alt=""> -->
                             <img v-if="isExternalUrl(user?.image)" :src="user.image" :alt="user?.nombre + '-img'">
